@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.1.0 (2026-04-06)
+
+Full Changelog: [v0.0.2...v0.1.0](https://github.com/anyformat-ai/anyformat-python/compare/v0.0.2...v0.1.0)
+
+### Features
+
+* **api:** manual updates ([30b29fa](https://github.com/anyformat-ai/anyformat-python/commit/30b29fa6e78543ae1d843bb4fe1f31d04584ec8e))
+
+
+### Chores
+
+* configure new SDK language ([bb2d573](https://github.com/anyformat-ai/anyformat-python/commit/bb2d5731d29a6f6348350f7432f25d98e41e49f9))
+* update SDK settings ([f70bd94](https://github.com/anyformat-ai/anyformat-python/commit/f70bd9470437eb5d58786219e5ed0bc8c89465af))
+* update SDK settings ([cdd002f](https://github.com/anyformat-ai/anyformat-python/commit/cdd002f2ee20a9319be450e279925691c83ee79d))
+* update SDK settings ([fda5451](https://github.com/anyformat-ai/anyformat-python/commit/fda5451aa41111f1a0642b856e7f086808f53db5))
+
 ## 0.0.2 (2026-03-27)
 
 Full Changelog: [v0.0.1...v0.0.2](https://github.com/anyformat-ai/anyformat-python/compare/v0.0.1...v0.0.2)
