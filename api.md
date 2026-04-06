@@ -1,9 +1,3 @@
-# Anyformat
-
-Methods:
-
-- <code title="get /">client.<a href="./src/anyformat/_client.py">health_check</a>() -> object</code>
-
 # Health
 
 Methods:
