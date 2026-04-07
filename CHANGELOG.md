@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.1 (2026-04-07)
+
+Full Changelog: [v0.1.0...v0.1.1](https://github.com/anyformat-ai/anyformat-python/compare/v0.1.0...v0.1.1)
+
+### Chores
+
+* update SDK settings ([026a52e](https://github.com/anyformat-ai/anyformat-python/commit/026a52ee9e691b8e709126a93c6f84e3e8985ef8))
+
 ## 0.1.0 (2026-04-06)
 
 Full Changelog: [v0.0.2...v0.1.0](https://github.com/anyformat-ai/anyformat-python/compare/v0.0.2...v0.1.0)
