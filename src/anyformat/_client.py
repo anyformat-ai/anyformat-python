@@ -11,9 +11,7 @@ import httpx
 from . import _exceptions
 from ._qs import Querystring
 from ._types import (
-    Body,
     Omit,
-    Query,
     Headers,
     Timeout,
     NotGiven,
@@ -26,19 +24,12 @@ from ._utils import is_given, get_async_library
 from ._compat import cached_property
 from ._models import SecurityOptions
 from ._version import __version__
-from ._response import (
-    to_raw_response_wrapper,
-    to_streamed_response_wrapper,
-    async_to_raw_response_wrapper,
-    async_to_streamed_response_wrapper,
-)
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
     AsyncAPIClient,
-    make_request_options,
 )
 
 if TYPE_CHECKING:
@@ -233,30 +224,6 @@ class Anyformat(SyncAPIClient):
     # Alias for `copy` for nicer inline usage, e.g.
     # client.with_options(timeout=10).foo.create(...)
     with_options = copy
-
-    def health_check(
-        self,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
-        """Health check endpoint.
-
-        Returns 200 OK if the service is running.
-
-        No authentication required.
-        """
-        return self.get(
-            "/",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=object,
-        )
 
     @override
     def _make_status_error(
@@ -466,30 +433,6 @@ class AsyncAnyformat(AsyncAPIClient):
     # client.with_options(timeout=10).foo.create(...)
     with_options = copy
 
-    async def health_check(
-        self,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
-        """Health check endpoint.
-
-        Returns 200 OK if the service is running.
-
-        No authentication required.
-        """
-        return await self.get(
-            "/",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=object,
-        )
-
     @override
     def _make_status_error(
         self,
@@ -530,10 +473,6 @@ class AnyformatWithRawResponse:
     def __init__(self, client: Anyformat) -> None:
         self._client = client
 
-        self.health_check = to_raw_response_wrapper(
-            client.health_check,
-        )
-
     @cached_property
     def health(self) -> health.HealthResourceWithRawResponse:
         """Health checks."""
@@ -568,10 +507,6 @@ class AsyncAnyformatWithRawResponse:
 
     def __init__(self, client: AsyncAnyformat) -> None:
         self._client = client
-
-        self.health_check = async_to_raw_response_wrapper(
-            client.health_check,
-        )
 
     @cached_property
     def health(self) -> health.AsyncHealthResourceWithRawResponse:
@@ -608,10 +543,6 @@ class AnyformatWithStreamedResponse:
     def __init__(self, client: Anyformat) -> None:
         self._client = client
 
-        self.health_check = to_streamed_response_wrapper(
-            client.health_check,
-        )
-
     @cached_property
     def health(self) -> health.HealthResourceWithStreamingResponse:
         """Health checks."""
@@ -646,10 +577,6 @@ class AsyncAnyformatWithStreamedResponse:
 
     def __init__(self, client: AsyncAnyformat) -> None:
         self._client = client
-
-        self.health_check = async_to_streamed_response_wrapper(
-            client.health_check,
-        )
 
     @cached_property
     def health(self) -> health.AsyncHealthResourceWithStreamingResponse:
