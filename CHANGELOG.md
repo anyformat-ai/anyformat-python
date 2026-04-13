@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.1.2 (2026-04-13)
+
+Full Changelog: [v0.1.1...v0.1.2](https://github.com/anyformat-ai/anyformat-python/compare/v0.1.1...v0.1.2)
+
+### Bug Fixes
+
+* **client:** preserve hardcoded query params when merging with user params ([0cbf40e](https://github.com/anyformat-ai/anyformat-python/commit/0cbf40e684e3bcbb947ad5597af1c196ba1f1c04))
+* ensure file data are only sent as 1 parameter ([9cb5971](https://github.com/anyformat-ai/anyformat-python/commit/9cb597128f06c02b3e84bffe4f061eaf01f67ae4))
+
+
+### Chores
+
+* update SDK settings ([2f29eb2](https://github.com/anyformat-ai/anyformat-python/commit/2f29eb2f802048b6d986717fe71d67824508ee7e))
+* update SDK settings ([593e7c9](https://github.com/anyformat-ai/anyformat-python/commit/593e7c95014d4f057e438ec16647d7aef68c4a3e))
+* update SDK settings ([f2f7771](https://github.com/anyformat-ai/anyformat-python/commit/f2f77718e14ffa282c34f081004490a1f5030041))
+
 ## 0.1.1 (2026-04-07)
 
 Full Changelog: [v0.1.0...v0.1.1](https://github.com/anyformat-ai/anyformat-python/compare/v0.1.0...v0.1.1)
