@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.2.0 (2026-04-18)
+
+Full Changelog: [v0.1.2...v0.2.0](https://github.com/anyformat-ai/anyformat-python/compare/v0.1.2...v0.2.0)
+
+### Features
+
+* **api:** rename anyformat-ai-mcp to anyformat-mcp ([1088738](https://github.com/anyformat-ai/anyformat-python/commit/10887383a482a459098ca2647bb549db77bc0461))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([352741e](https://github.com/anyformat-ai/anyformat-python/commit/352741eaf6df138f58aabe0db3d286c2845232cb))
+
+
+### Chores
+
+* configure new SDK language ([9808ea5](https://github.com/anyformat-ai/anyformat-python/commit/9808ea5a96eae3c76548a57115ef40a592d56fc3))
+
 ## 0.1.2 (2026-04-13)
 
 Full Changelog: [v0.1.1...v0.1.2](https://github.com/anyformat-ai/anyformat-python/compare/v0.1.1...v0.1.2)
