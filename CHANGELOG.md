@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0 (2026-04-20)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/anyformat-ai/anyformat-python/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* **api:** api update ([7a801c6](https://github.com/anyformat-ai/anyformat-python/commit/7a801c6fe3aaa1c5f74c1508634bfbc06bd29910))
+
 ## 0.2.0 (2026-04-18)
 
 Full Changelog: [v0.1.2...v0.2.0](https://github.com/anyformat-ai/anyformat-python/compare/v0.1.2...v0.2.0)
