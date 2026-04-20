@@ -9,12 +9,6 @@ __all__ = ["WorkflowRunParams"]
 
 
 class WorkflowRunParams(TypedDict, total=False):
-    content_type: Optional[str]
-
     file: Optional[str]
-
-    file_base64: Optional[str]
-
-    filename: Optional[str]
 
     text: Optional[str]
