@@ -6,13 +6,7 @@ from typing import Optional
 
 import httpx
 
-from ..types import (
-    workflow_run_params,
-    workflow_list_params,
-    workflow_upload_params,
-    workflow_results_params,
-    workflow_list_runs_params,
-)
+from ..types import workflow_run_params, workflow_list_params, workflow_upload_params, workflow_list_runs_params
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -234,59 +228,11 @@ class WorkflowsResource(SyncAPIResource):
             cast_to=WorkflowListRunsResponse,
         )
 
-    def results(
-        self,
-        workflow_id: str,
-        *,
-        as_lists: Optional[str] | Omit = omit,
-        output_format: str | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
-        """
-        Get workflow results.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not workflow_id:
-            raise ValueError(f"Expected a non-empty value for `workflow_id` but received {workflow_id!r}")
-        return self._get(
-            path_template("/v2/workflows/{workflow_id}/results/", workflow_id=workflow_id),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "as_lists": as_lists,
-                        "output_format": output_format,
-                    },
-                    workflow_results_params.WorkflowResultsParams,
-                ),
-            ),
-            cast_to=object,
-        )
-
     def run(
         self,
         workflow_id: str,
         *,
-        content_type: Optional[str] | Omit = omit,
         file: Optional[str] | Omit = omit,
-        file_base64: Optional[str] | Omit = omit,
-        filename: Optional[str] | Omit = omit,
         text: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -317,10 +263,7 @@ class WorkflowsResource(SyncAPIResource):
             path_template("/v2/workflows/{workflow_id}/run/", workflow_id=workflow_id),
             body=maybe_transform(
                 {
-                    "content_type": content_type,
                     "file": file,
-                    "file_base64": file_base64,
-                    "filename": filename,
                     "text": text,
                 },
                 workflow_run_params.WorkflowRunParams,
@@ -335,10 +278,7 @@ class WorkflowsResource(SyncAPIResource):
         self,
         workflow_id: str,
         *,
-        content_type: Optional[str] | Omit = omit,
         file: Optional[str] | Omit = omit,
-        file_base64: Optional[str] | Omit = omit,
-        filename: Optional[str] | Omit = omit,
         text: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -369,10 +309,7 @@ class WorkflowsResource(SyncAPIResource):
             path_template("/v2/workflows/{workflow_id}/upload/", workflow_id=workflow_id),
             body=maybe_transform(
                 {
-                    "content_type": content_type,
                     "file": file,
-                    "file_base64": file_base64,
-                    "filename": filename,
                     "text": text,
                 },
                 workflow_upload_params.WorkflowUploadParams,
@@ -585,59 +522,11 @@ class AsyncWorkflowsResource(AsyncAPIResource):
             cast_to=WorkflowListRunsResponse,
         )
 
-    async def results(
-        self,
-        workflow_id: str,
-        *,
-        as_lists: Optional[str] | Omit = omit,
-        output_format: str | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
-        """
-        Get workflow results.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not workflow_id:
-            raise ValueError(f"Expected a non-empty value for `workflow_id` but received {workflow_id!r}")
-        return await self._get(
-            path_template("/v2/workflows/{workflow_id}/results/", workflow_id=workflow_id),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "as_lists": as_lists,
-                        "output_format": output_format,
-                    },
-                    workflow_results_params.WorkflowResultsParams,
-                ),
-            ),
-            cast_to=object,
-        )
-
     async def run(
         self,
         workflow_id: str,
         *,
-        content_type: Optional[str] | Omit = omit,
         file: Optional[str] | Omit = omit,
-        file_base64: Optional[str] | Omit = omit,
-        filename: Optional[str] | Omit = omit,
         text: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -668,10 +557,7 @@ class AsyncWorkflowsResource(AsyncAPIResource):
             path_template("/v2/workflows/{workflow_id}/run/", workflow_id=workflow_id),
             body=await async_maybe_transform(
                 {
-                    "content_type": content_type,
                     "file": file,
-                    "file_base64": file_base64,
-                    "filename": filename,
                     "text": text,
                 },
                 workflow_run_params.WorkflowRunParams,
@@ -686,10 +572,7 @@ class AsyncWorkflowsResource(AsyncAPIResource):
         self,
         workflow_id: str,
         *,
-        content_type: Optional[str] | Omit = omit,
         file: Optional[str] | Omit = omit,
-        file_base64: Optional[str] | Omit = omit,
-        filename: Optional[str] | Omit = omit,
         text: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -720,10 +603,7 @@ class AsyncWorkflowsResource(AsyncAPIResource):
             path_template("/v2/workflows/{workflow_id}/upload/", workflow_id=workflow_id),
             body=await async_maybe_transform(
                 {
-                    "content_type": content_type,
                     "file": file,
-                    "file_base64": file_base64,
-                    "filename": filename,
                     "text": text,
                 },
                 workflow_upload_params.WorkflowUploadParams,
@@ -754,9 +634,6 @@ class WorkflowsResourceWithRawResponse:
         self.list_runs = to_raw_response_wrapper(
             workflows.list_runs,
         )
-        self.results = to_raw_response_wrapper(
-            workflows.results,
-        )
         self.run = to_raw_response_wrapper(
             workflows.run,
         )
@@ -783,9 +660,6 @@ class AsyncWorkflowsResourceWithRawResponse:
         )
         self.list_runs = async_to_raw_response_wrapper(
             workflows.list_runs,
-        )
-        self.results = async_to_raw_response_wrapper(
-            workflows.results,
         )
         self.run = async_to_raw_response_wrapper(
             workflows.run,
@@ -814,9 +688,6 @@ class WorkflowsResourceWithStreamingResponse:
         self.list_runs = to_streamed_response_wrapper(
             workflows.list_runs,
         )
-        self.results = to_streamed_response_wrapper(
-            workflows.results,
-        )
         self.run = to_streamed_response_wrapper(
             workflows.run,
         )
@@ -843,9 +714,6 @@ class AsyncWorkflowsResourceWithStreamingResponse:
         )
         self.list_runs = async_to_streamed_response_wrapper(
             workflows.list_runs,
-        )
-        self.results = async_to_streamed_response_wrapper(
-            workflows.results,
         )
         self.run = async_to_streamed_response_wrapper(
             workflows.run,

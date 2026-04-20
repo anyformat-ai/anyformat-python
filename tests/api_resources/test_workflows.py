@@ -229,58 +229,6 @@ class TestWorkflows:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_results(self, client: Anyformat) -> None:
-        workflow = client.workflows.results(
-            workflow_id="workflow_id",
-        )
-        assert_matches_type(object, workflow, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_method_results_with_all_params(self, client: Anyformat) -> None:
-        workflow = client.workflows.results(
-            workflow_id="workflow_id",
-            as_lists="as_lists",
-            output_format="jsonl",
-        )
-        assert_matches_type(object, workflow, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_raw_response_results(self, client: Anyformat) -> None:
-        response = client.workflows.with_raw_response.results(
-            workflow_id="workflow_id",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        workflow = response.parse()
-        assert_matches_type(object, workflow, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_streaming_response_results(self, client: Anyformat) -> None:
-        with client.workflows.with_streaming_response.results(
-            workflow_id="workflow_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            workflow = response.parse()
-            assert_matches_type(object, workflow, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_path_params_results(self, client: Anyformat) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `workflow_id` but received ''"):
-            client.workflows.with_raw_response.results(
-                workflow_id="",
-            )
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
     def test_method_run(self, client: Anyformat) -> None:
         workflow = client.workflows.run(
             workflow_id="workflow_id",
@@ -292,10 +240,7 @@ class TestWorkflows:
     def test_method_run_with_all_params(self, client: Anyformat) -> None:
         workflow = client.workflows.run(
             workflow_id="workflow_id",
-            content_type="content_type",
             file="file",
-            file_base64="file_base64",
-            filename="filename",
             text="text",
         )
         assert_matches_type(WorkflowRunResponse, workflow, path=["response"])
@@ -347,10 +292,7 @@ class TestWorkflows:
     def test_method_upload_with_all_params(self, client: Anyformat) -> None:
         workflow = client.workflows.upload(
             workflow_id="workflow_id",
-            content_type="content_type",
             file="file",
-            file_base64="file_base64",
-            filename="filename",
             text="text",
         )
         assert_matches_type(WorkflowUploadResponse, workflow, path=["response"])
@@ -601,58 +543,6 @@ class TestAsyncWorkflows:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_results(self, async_client: AsyncAnyformat) -> None:
-        workflow = await async_client.workflows.results(
-            workflow_id="workflow_id",
-        )
-        assert_matches_type(object, workflow, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_results_with_all_params(self, async_client: AsyncAnyformat) -> None:
-        workflow = await async_client.workflows.results(
-            workflow_id="workflow_id",
-            as_lists="as_lists",
-            output_format="jsonl",
-        )
-        assert_matches_type(object, workflow, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_raw_response_results(self, async_client: AsyncAnyformat) -> None:
-        response = await async_client.workflows.with_raw_response.results(
-            workflow_id="workflow_id",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        workflow = await response.parse()
-        assert_matches_type(object, workflow, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_streaming_response_results(self, async_client: AsyncAnyformat) -> None:
-        async with async_client.workflows.with_streaming_response.results(
-            workflow_id="workflow_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            workflow = await response.parse()
-            assert_matches_type(object, workflow, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_path_params_results(self, async_client: AsyncAnyformat) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `workflow_id` but received ''"):
-            await async_client.workflows.with_raw_response.results(
-                workflow_id="",
-            )
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
     async def test_method_run(self, async_client: AsyncAnyformat) -> None:
         workflow = await async_client.workflows.run(
             workflow_id="workflow_id",
@@ -664,10 +554,7 @@ class TestAsyncWorkflows:
     async def test_method_run_with_all_params(self, async_client: AsyncAnyformat) -> None:
         workflow = await async_client.workflows.run(
             workflow_id="workflow_id",
-            content_type="content_type",
             file="file",
-            file_base64="file_base64",
-            filename="filename",
             text="text",
         )
         assert_matches_type(WorkflowRunResponse, workflow, path=["response"])
@@ -719,10 +606,7 @@ class TestAsyncWorkflows:
     async def test_method_upload_with_all_params(self, async_client: AsyncAnyformat) -> None:
         workflow = await async_client.workflows.upload(
             workflow_id="workflow_id",
-            content_type="content_type",
             file="file",
-            file_base64="file_base64",
-            filename="filename",
             text="text",
         )
         assert_matches_type(WorkflowUploadResponse, workflow, path=["response"])
