@@ -20,7 +20,7 @@ Use the Anyformat MCP Server to enable AI assistants to interact with this API, 
 
 ## Documentation
 
-The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.anyformat.ai](https://docs.anyformat.ai). The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
@@ -41,7 +41,11 @@ client = Anyformat(
     api_key=os.environ.get("ANYFORMAT_API_KEY"),  # This is the default and can be omitted
 )
 
-response = client.health.check()
+response = client.workflows.run(
+    workflow_id="0686bb97-8c30-70f0-8000-97669e000eb8",
+    text="Invoice #12345\nDate: 2025-01-15\nAmount: $1,250.00\nVendor: Acme Corp",
+)
+print(response.id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -64,7 +68,11 @@ client = AsyncAnyformat(
 
 
 async def main() -> None:
-    response = await client.health.check()
+    response = await client.workflows.run(
+        workflow_id="0686bb97-8c30-70f0-8000-97669e000eb8",
+        text="Invoice #12345\nDate: 2025-01-15\nAmount: $1,250.00\nVendor: Acme Corp",
+    )
+    print(response.id)
 
 
 asyncio.run(main())
@@ -97,7 +105,11 @@ async def main() -> None:
         api_key=os.environ.get("ANYFORMAT_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
-        response = await client.health.check()
+        response = await client.workflows.run(
+            workflow_id="0686bb97-8c30-70f0-8000-97669e000eb8",
+            text="Invoice #12345\nDate: 2025-01-15\nAmount: $1,250.00\nVendor: Acme Corp",
+        )
+        print(response.id)
 
 
 asyncio.run(main())
