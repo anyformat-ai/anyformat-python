@@ -1,11 +1,11 @@
 [project]
 name = "anyformat"
-version = "0.3.0"
+version = "0.4.0"
 description = "The official Python library for the anyformat API"
 dynamic = ["readme"]
 license = "Apache-2.0"
 authors = [
-{ name = "Anyformat", email = "" },
+{ name = "Anyformat", email = "support@anyformat.ai" },
 ]
 
 dependencies = [
