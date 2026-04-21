@@ -15,6 +15,8 @@ from anyformat.types import (
     WorkflowListResponse,
     WorkflowUploadResponse,
     WorkflowListRunsResponse,
+    WorkflowListFilesResponse,
+    WorkflowCreateFileResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -173,6 +175,156 @@ class TestWorkflows:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `workflow_id` but received ''"):
             client.workflows.with_raw_response.delete(
                 "",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_create_file(self, client: Anyformat) -> None:
+        workflow = client.workflows.create_file(
+            workflow_id="workflow_id",
+            files=["string"],
+        )
+        assert_matches_type(WorkflowCreateFileResponse, workflow, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_create_file(self, client: Anyformat) -> None:
+        response = client.workflows.with_raw_response.create_file(
+            workflow_id="workflow_id",
+            files=["string"],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        workflow = response.parse()
+        assert_matches_type(WorkflowCreateFileResponse, workflow, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_create_file(self, client: Anyformat) -> None:
+        with client.workflows.with_streaming_response.create_file(
+            workflow_id="workflow_id",
+            files=["string"],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            workflow = response.parse()
+            assert_matches_type(WorkflowCreateFileResponse, workflow, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_create_file(self, client: Anyformat) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `workflow_id` but received ''"):
+            client.workflows.with_raw_response.create_file(
+                workflow_id="",
+                files=["string"],
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_get_file_results(self, client: Anyformat) -> None:
+        workflow = client.workflows.get_file_results(
+            collection_id="collection_id",
+            workflow_id="workflow_id",
+        )
+        assert_matches_type(object, workflow, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_get_file_results(self, client: Anyformat) -> None:
+        response = client.workflows.with_raw_response.get_file_results(
+            collection_id="collection_id",
+            workflow_id="workflow_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        workflow = response.parse()
+        assert_matches_type(object, workflow, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_get_file_results(self, client: Anyformat) -> None:
+        with client.workflows.with_streaming_response.get_file_results(
+            collection_id="collection_id",
+            workflow_id="workflow_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            workflow = response.parse()
+            assert_matches_type(object, workflow, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_get_file_results(self, client: Anyformat) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `workflow_id` but received ''"):
+            client.workflows.with_raw_response.get_file_results(
+                collection_id="collection_id",
+                workflow_id="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `collection_id` but received ''"):
+            client.workflows.with_raw_response.get_file_results(
+                collection_id="",
+                workflow_id="workflow_id",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_list_files(self, client: Anyformat) -> None:
+        workflow = client.workflows.list_files(
+            workflow_id="workflow_id",
+        )
+        assert_matches_type(WorkflowListFilesResponse, workflow, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_list_files_with_all_params(self, client: Anyformat) -> None:
+        workflow = client.workflows.list_files(
+            workflow_id="workflow_id",
+            page=1,
+            page_size=1,
+        )
+        assert_matches_type(WorkflowListFilesResponse, workflow, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_list_files(self, client: Anyformat) -> None:
+        response = client.workflows.with_raw_response.list_files(
+            workflow_id="workflow_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        workflow = response.parse()
+        assert_matches_type(WorkflowListFilesResponse, workflow, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_list_files(self, client: Anyformat) -> None:
+        with client.workflows.with_streaming_response.list_files(
+            workflow_id="workflow_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            workflow = response.parse()
+            assert_matches_type(WorkflowListFilesResponse, workflow, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_list_files(self, client: Anyformat) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `workflow_id` but received ''"):
+            client.workflows.with_raw_response.list_files(
+                workflow_id="",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -487,6 +639,156 @@ class TestAsyncWorkflows:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `workflow_id` but received ''"):
             await async_client.workflows.with_raw_response.delete(
                 "",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_create_file(self, async_client: AsyncAnyformat) -> None:
+        workflow = await async_client.workflows.create_file(
+            workflow_id="workflow_id",
+            files=["string"],
+        )
+        assert_matches_type(WorkflowCreateFileResponse, workflow, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_create_file(self, async_client: AsyncAnyformat) -> None:
+        response = await async_client.workflows.with_raw_response.create_file(
+            workflow_id="workflow_id",
+            files=["string"],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        workflow = await response.parse()
+        assert_matches_type(WorkflowCreateFileResponse, workflow, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_create_file(self, async_client: AsyncAnyformat) -> None:
+        async with async_client.workflows.with_streaming_response.create_file(
+            workflow_id="workflow_id",
+            files=["string"],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            workflow = await response.parse()
+            assert_matches_type(WorkflowCreateFileResponse, workflow, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_create_file(self, async_client: AsyncAnyformat) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `workflow_id` but received ''"):
+            await async_client.workflows.with_raw_response.create_file(
+                workflow_id="",
+                files=["string"],
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_get_file_results(self, async_client: AsyncAnyformat) -> None:
+        workflow = await async_client.workflows.get_file_results(
+            collection_id="collection_id",
+            workflow_id="workflow_id",
+        )
+        assert_matches_type(object, workflow, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_get_file_results(self, async_client: AsyncAnyformat) -> None:
+        response = await async_client.workflows.with_raw_response.get_file_results(
+            collection_id="collection_id",
+            workflow_id="workflow_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        workflow = await response.parse()
+        assert_matches_type(object, workflow, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_get_file_results(self, async_client: AsyncAnyformat) -> None:
+        async with async_client.workflows.with_streaming_response.get_file_results(
+            collection_id="collection_id",
+            workflow_id="workflow_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            workflow = await response.parse()
+            assert_matches_type(object, workflow, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_get_file_results(self, async_client: AsyncAnyformat) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `workflow_id` but received ''"):
+            await async_client.workflows.with_raw_response.get_file_results(
+                collection_id="collection_id",
+                workflow_id="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `collection_id` but received ''"):
+            await async_client.workflows.with_raw_response.get_file_results(
+                collection_id="",
+                workflow_id="workflow_id",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_list_files(self, async_client: AsyncAnyformat) -> None:
+        workflow = await async_client.workflows.list_files(
+            workflow_id="workflow_id",
+        )
+        assert_matches_type(WorkflowListFilesResponse, workflow, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_list_files_with_all_params(self, async_client: AsyncAnyformat) -> None:
+        workflow = await async_client.workflows.list_files(
+            workflow_id="workflow_id",
+            page=1,
+            page_size=1,
+        )
+        assert_matches_type(WorkflowListFilesResponse, workflow, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_list_files(self, async_client: AsyncAnyformat) -> None:
+        response = await async_client.workflows.with_raw_response.list_files(
+            workflow_id="workflow_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        workflow = await response.parse()
+        assert_matches_type(WorkflowListFilesResponse, workflow, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_list_files(self, async_client: AsyncAnyformat) -> None:
+        async with async_client.workflows.with_streaming_response.list_files(
+            workflow_id="workflow_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            workflow = await response.parse()
+            assert_matches_type(WorkflowListFilesResponse, workflow, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_list_files(self, async_client: AsyncAnyformat) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `workflow_id` but received ''"):
+            await async_client.workflows.with_raw_response.list_files(
+                workflow_id="",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")

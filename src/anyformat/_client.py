@@ -125,7 +125,6 @@ class Anyformat(SyncAPIClient):
 
     @cached_property
     def workflows(self) -> WorkflowsResource:
-        """Workflow CRUD, execution, runs, and results."""
         from .resources.workflows import WorkflowsResource
 
         return WorkflowsResource(self)
@@ -333,7 +332,6 @@ class AsyncAnyformat(AsyncAPIClient):
 
     @cached_property
     def workflows(self) -> AsyncWorkflowsResource:
-        """Workflow CRUD, execution, runs, and results."""
         from .resources.workflows import AsyncWorkflowsResource
 
         return AsyncWorkflowsResource(self)
@@ -496,7 +494,6 @@ class AnyformatWithRawResponse:
 
     @cached_property
     def workflows(self) -> workflows.WorkflowsResourceWithRawResponse:
-        """Workflow CRUD, execution, runs, and results."""
         from .resources.workflows import WorkflowsResourceWithRawResponse
 
         return WorkflowsResourceWithRawResponse(self._client.workflows)
@@ -531,7 +528,6 @@ class AsyncAnyformatWithRawResponse:
 
     @cached_property
     def workflows(self) -> workflows.AsyncWorkflowsResourceWithRawResponse:
-        """Workflow CRUD, execution, runs, and results."""
         from .resources.workflows import AsyncWorkflowsResourceWithRawResponse
 
         return AsyncWorkflowsResourceWithRawResponse(self._client.workflows)
@@ -566,7 +562,6 @@ class AnyformatWithStreamedResponse:
 
     @cached_property
     def workflows(self) -> workflows.WorkflowsResourceWithStreamingResponse:
-        """Workflow CRUD, execution, runs, and results."""
         from .resources.workflows import WorkflowsResourceWithStreamingResponse
 
         return WorkflowsResourceWithStreamingResponse(self._client.workflows)
@@ -601,7 +596,6 @@ class AsyncAnyformatWithStreamedResponse:
 
     @cached_property
     def workflows(self) -> workflows.AsyncWorkflowsResourceWithStreamingResponse:
-        """Workflow CRUD, execution, runs, and results."""
         from .resources.workflows import AsyncWorkflowsResourceWithStreamingResponse
 
         return AsyncWorkflowsResourceWithStreamingResponse(self._client.workflows)

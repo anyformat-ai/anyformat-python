@@ -6,8 +6,15 @@ from typing import Optional
 
 import httpx
 
-from ..types import workflow_run_params, workflow_list_params, workflow_upload_params, workflow_list_runs_params
-from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from ..types import (
+    workflow_run_params,
+    workflow_list_params,
+    workflow_upload_params,
+    workflow_list_runs_params,
+    workflow_list_files_params,
+    workflow_create_file_params,
+)
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -23,13 +30,13 @@ from ..types.workflow_run_response import WorkflowRunResponse
 from ..types.workflow_list_response import WorkflowListResponse
 from ..types.workflow_upload_response import WorkflowUploadResponse
 from ..types.workflow_list_runs_response import WorkflowListRunsResponse
+from ..types.workflow_list_files_response import WorkflowListFilesResponse
+from ..types.workflow_create_file_response import WorkflowCreateFileResponse
 
 __all__ = ["WorkflowsResource", "AsyncWorkflowsResource"]
 
 
 class WorkflowsResource(SyncAPIResource):
-    """Workflow CRUD, execution, runs, and results."""
-
     @cached_property
     def with_raw_response(self) -> WorkflowsResourceWithRawResponse:
         """
@@ -183,6 +190,133 @@ class WorkflowsResource(SyncAPIResource):
             cast_to=NoneType,
         )
 
+    def create_file(
+        self,
+        workflow_id: str,
+        *,
+        files: SequenceNotStr[str],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> WorkflowCreateFileResponse:
+        """
+        Upload files to a workflow, creating a file collection.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not workflow_id:
+            raise ValueError(f"Expected a non-empty value for `workflow_id` but received {workflow_id!r}")
+        # It should be noted that the actual Content-Type header that will be
+        # sent to the server will contain a `boundary` parameter, e.g.
+        # multipart/form-data; boundary=---abc--
+        extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
+        return self._post(
+            path_template("/v2/workflows/{workflow_id}/files/", workflow_id=workflow_id),
+            body=maybe_transform({"files": files}, workflow_create_file_params.WorkflowCreateFileParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=WorkflowCreateFileResponse,
+        )
+
+    def get_file_results(
+        self,
+        collection_id: str,
+        *,
+        workflow_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> object:
+        """
+        Get processing results for a file collection.
+
+        Returns the backend collection results with internal metadata stripped. Returns
+        412 if processing is not yet complete.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not workflow_id:
+            raise ValueError(f"Expected a non-empty value for `workflow_id` but received {workflow_id!r}")
+        if not collection_id:
+            raise ValueError(f"Expected a non-empty value for `collection_id` but received {collection_id!r}")
+        return self._get(
+            path_template(
+                "/v2/workflows/{workflow_id}/files/{collection_id}/results/",
+                workflow_id=workflow_id,
+                collection_id=collection_id,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
+        )
+
+    def list_files(
+        self,
+        workflow_id: str,
+        *,
+        page: int | Omit = omit,
+        page_size: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> WorkflowListFilesResponse:
+        """
+        List file collections for a workflow.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not workflow_id:
+            raise ValueError(f"Expected a non-empty value for `workflow_id` but received {workflow_id!r}")
+        return self._get(
+            path_template("/v2/workflows/{workflow_id}/files/", workflow_id=workflow_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "page": page,
+                        "page_size": page_size,
+                    },
+                    workflow_list_files_params.WorkflowListFilesParams,
+                ),
+            ),
+            cast_to=WorkflowListFilesResponse,
+        )
+
     def list_runs(
         self,
         workflow_id: str,
@@ -322,8 +456,6 @@ class WorkflowsResource(SyncAPIResource):
 
 
 class AsyncWorkflowsResource(AsyncAPIResource):
-    """Workflow CRUD, execution, runs, and results."""
-
     @cached_property
     def with_raw_response(self) -> AsyncWorkflowsResourceWithRawResponse:
         """
@@ -475,6 +607,133 @@ class AsyncWorkflowsResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=NoneType,
+        )
+
+    async def create_file(
+        self,
+        workflow_id: str,
+        *,
+        files: SequenceNotStr[str],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> WorkflowCreateFileResponse:
+        """
+        Upload files to a workflow, creating a file collection.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not workflow_id:
+            raise ValueError(f"Expected a non-empty value for `workflow_id` but received {workflow_id!r}")
+        # It should be noted that the actual Content-Type header that will be
+        # sent to the server will contain a `boundary` parameter, e.g.
+        # multipart/form-data; boundary=---abc--
+        extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
+        return await self._post(
+            path_template("/v2/workflows/{workflow_id}/files/", workflow_id=workflow_id),
+            body=await async_maybe_transform({"files": files}, workflow_create_file_params.WorkflowCreateFileParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=WorkflowCreateFileResponse,
+        )
+
+    async def get_file_results(
+        self,
+        collection_id: str,
+        *,
+        workflow_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> object:
+        """
+        Get processing results for a file collection.
+
+        Returns the backend collection results with internal metadata stripped. Returns
+        412 if processing is not yet complete.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not workflow_id:
+            raise ValueError(f"Expected a non-empty value for `workflow_id` but received {workflow_id!r}")
+        if not collection_id:
+            raise ValueError(f"Expected a non-empty value for `collection_id` but received {collection_id!r}")
+        return await self._get(
+            path_template(
+                "/v2/workflows/{workflow_id}/files/{collection_id}/results/",
+                workflow_id=workflow_id,
+                collection_id=collection_id,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
+        )
+
+    async def list_files(
+        self,
+        workflow_id: str,
+        *,
+        page: int | Omit = omit,
+        page_size: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> WorkflowListFilesResponse:
+        """
+        List file collections for a workflow.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not workflow_id:
+            raise ValueError(f"Expected a non-empty value for `workflow_id` but received {workflow_id!r}")
+        return await self._get(
+            path_template("/v2/workflows/{workflow_id}/files/", workflow_id=workflow_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "page": page,
+                        "page_size": page_size,
+                    },
+                    workflow_list_files_params.WorkflowListFilesParams,
+                ),
+            ),
+            cast_to=WorkflowListFilesResponse,
         )
 
     async def list_runs(
@@ -631,6 +890,15 @@ class WorkflowsResourceWithRawResponse:
         self.delete = to_raw_response_wrapper(
             workflows.delete,
         )
+        self.create_file = to_raw_response_wrapper(
+            workflows.create_file,
+        )
+        self.get_file_results = to_raw_response_wrapper(
+            workflows.get_file_results,
+        )
+        self.list_files = to_raw_response_wrapper(
+            workflows.list_files,
+        )
         self.list_runs = to_raw_response_wrapper(
             workflows.list_runs,
         )
@@ -657,6 +925,15 @@ class AsyncWorkflowsResourceWithRawResponse:
         )
         self.delete = async_to_raw_response_wrapper(
             workflows.delete,
+        )
+        self.create_file = async_to_raw_response_wrapper(
+            workflows.create_file,
+        )
+        self.get_file_results = async_to_raw_response_wrapper(
+            workflows.get_file_results,
+        )
+        self.list_files = async_to_raw_response_wrapper(
+            workflows.list_files,
         )
         self.list_runs = async_to_raw_response_wrapper(
             workflows.list_runs,
@@ -685,6 +962,15 @@ class WorkflowsResourceWithStreamingResponse:
         self.delete = to_streamed_response_wrapper(
             workflows.delete,
         )
+        self.create_file = to_streamed_response_wrapper(
+            workflows.create_file,
+        )
+        self.get_file_results = to_streamed_response_wrapper(
+            workflows.get_file_results,
+        )
+        self.list_files = to_streamed_response_wrapper(
+            workflows.list_files,
+        )
         self.list_runs = to_streamed_response_wrapper(
             workflows.list_runs,
         )
@@ -711,6 +997,15 @@ class AsyncWorkflowsResourceWithStreamingResponse:
         )
         self.delete = async_to_streamed_response_wrapper(
             workflows.delete,
+        )
+        self.create_file = async_to_streamed_response_wrapper(
+            workflows.create_file,
+        )
+        self.get_file_results = async_to_streamed_response_wrapper(
+            workflows.get_file_results,
+        )
+        self.list_files = async_to_streamed_response_wrapper(
+            workflows.list_files,
         )
         self.list_runs = async_to_streamed_response_wrapper(
             workflows.list_runs,
