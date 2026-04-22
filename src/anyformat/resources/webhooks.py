@@ -23,7 +23,10 @@ __all__ = ["WebhooksResource", "AsyncWebhooksResource"]
 
 
 class WebhooksResource(SyncAPIResource):
-    """Webhook subscriptions for async notifications."""
+    """Webhook subscriptions for asynchronous event notifications.
+
+    Get notified when extractions complete or fail.
+    """
 
     @cached_property
     def with_raw_response(self) -> WebhooksResourceWithRawResponse:
@@ -57,12 +60,23 @@ class WebhooksResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WebhookCreateResponse:
         """
-        Create a new webhook subscription.
+        Create a new webhook subscription for your organization.
 
-        Validates URL (HTTPS only) and event types, then forwards to backend service.
-        Returns the created webhook with generated secret.
+        The webhook URL must use HTTPS. AnyFormat will send POST requests to this URL
+        when the subscribed events occur. The response includes a `secret` that you
+        should use to verify webhook signatures.
+
+        Supported events:
+
+        - `extraction.completed` — fired when a file extraction finishes successfully.
+        - `extraction.failed` — fired when a file extraction fails.
 
         Args:
+          url: The HTTPS URL to receive webhook events. Must be publicly accessible.
+
+          events: List of event types to subscribe to. Available events: `extraction.completed`,
+              `extraction.failed`.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -99,7 +113,8 @@ class WebhooksResource(SyncAPIResource):
         """
         List all webhook subscriptions for the authenticated organization.
 
-        Returns a list of webhooks (secrets are excluded in list view).
+        Returns a list of webhooks. Secrets are excluded from the list response for
+        security — they are only returned once, when the webhook is created.
         """
         return self._get(
             "/v2/webhooks/",
@@ -123,7 +138,8 @@ class WebhooksResource(SyncAPIResource):
         """
         Delete a webhook subscription by ID.
 
-        Returns 204 on success, 404 if webhook not found, 403 if unauthorized.
+        After deletion, AnyFormat will stop sending events to the webhook URL. This
+        action is irreversible.
 
         Args:
           extra_headers: Send extra headers
@@ -147,7 +163,10 @@ class WebhooksResource(SyncAPIResource):
 
 
 class AsyncWebhooksResource(AsyncAPIResource):
-    """Webhook subscriptions for async notifications."""
+    """Webhook subscriptions for asynchronous event notifications.
+
+    Get notified when extractions complete or fail.
+    """
 
     @cached_property
     def with_raw_response(self) -> AsyncWebhooksResourceWithRawResponse:
@@ -181,12 +200,23 @@ class AsyncWebhooksResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WebhookCreateResponse:
         """
-        Create a new webhook subscription.
+        Create a new webhook subscription for your organization.
 
-        Validates URL (HTTPS only) and event types, then forwards to backend service.
-        Returns the created webhook with generated secret.
+        The webhook URL must use HTTPS. AnyFormat will send POST requests to this URL
+        when the subscribed events occur. The response includes a `secret` that you
+        should use to verify webhook signatures.
+
+        Supported events:
+
+        - `extraction.completed` — fired when a file extraction finishes successfully.
+        - `extraction.failed` — fired when a file extraction fails.
 
         Args:
+          url: The HTTPS URL to receive webhook events. Must be publicly accessible.
+
+          events: List of event types to subscribe to. Available events: `extraction.completed`,
+              `extraction.failed`.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -223,7 +253,8 @@ class AsyncWebhooksResource(AsyncAPIResource):
         """
         List all webhook subscriptions for the authenticated organization.
 
-        Returns a list of webhooks (secrets are excluded in list view).
+        Returns a list of webhooks. Secrets are excluded from the list response for
+        security — they are only returned once, when the webhook is created.
         """
         return await self._get(
             "/v2/webhooks/",
@@ -247,7 +278,8 @@ class AsyncWebhooksResource(AsyncAPIResource):
         """
         Delete a webhook subscription by ID.
 
-        Returns 204 on success, 404 if webhook not found, 403 if unauthorized.
+        After deletion, AnyFormat will stop sending events to the webhook URL. This
+        action is irreversible.
 
         Args:
           extra_headers: Send extra headers

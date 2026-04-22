@@ -251,7 +251,7 @@ response = client.health.with_raw_response.check()
 print(response.headers.get('X-My-Header'))
 
 health = response.parse()  # get the object that `health.check()` would have returned
-print(health)
+print(health.message)
 ```
 
 These methods return an [`APIResponse`](https://github.com/anyformat-ai/anyformat-python/tree/main/src/anyformat/_response.py) object.

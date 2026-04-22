@@ -9,17 +9,22 @@ __all__ = ["WebhookListResponse", "WebhookListResponseItem"]
 
 
 class WebhookListResponseItem(BaseModel):
-    """Response schema for listing webhooks (excludes secret)"""
+    """Webhook subscription details (secret excluded for security)."""
 
     id: str
+    """Unique identifier of the webhook."""
 
     created_at: str
+    """Timestamp when the webhook was created (ISO 8601)."""
 
     events: List[str]
+    """Event types this webhook is subscribed to."""
 
     is_active: bool
+    """Whether the webhook is currently active."""
 
     url: str
+    """The URL receiving webhook events."""
 
 
 WebhookListResponse: TypeAlias = List[WebhookListResponseItem]
