@@ -11,5 +11,10 @@ __all__ = ["WebhookCreateParams"]
 
 class WebhookCreateParams(TypedDict, total=False):
     url: Required[str]
+    """The HTTPS URL to receive webhook events. Must be publicly accessible."""
 
     events: SequenceNotStr[str]
+    """List of event types to subscribe to.
+
+    Available events: `extraction.completed`, `extraction.failed`.
+    """

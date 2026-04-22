@@ -9,12 +9,16 @@ __all__ = ["WorkflowListResponse"]
 
 
 class WorkflowListResponse(BaseModel):
-    """GET /workflows/ — paginated workflow list."""
+    """Paginated list of workflows."""
 
     count: int
+    """Total number of workflows matching the query."""
 
     page: int
+    """Current page number."""
 
     page_size: int
+    """Number of results per page."""
 
     results: List[Workflow]
+    """List of workflows for the current page."""

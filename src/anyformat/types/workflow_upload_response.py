@@ -8,8 +8,12 @@ __all__ = ["WorkflowUploadResponse"]
 
 
 class WorkflowUploadResponse(BaseModel):
-    """POST /workflows/{id}/upload/ — upload confirmation."""
+    """
+    Confirmation that a file was uploaded successfully without triggering extraction.
+    """
 
     status: str
+    """Upload result: `uploaded` on success."""
 
     filename: Optional[str] = None
+    """Name of the uploaded file."""

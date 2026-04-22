@@ -1,8 +1,14 @@
 # Health
 
+Types:
+
+```python
+from anyformat.types import HealthCheckResponse
+```
+
 Methods:
 
-- <code title="get /health/">client.health.<a href="./src/anyformat/resources/health.py">check</a>() -> object</code>
+- <code title="get /health/">client.health.<a href="./src/anyformat/resources/health.py">check</a>() -> <a href="./src/anyformat/types/health_check_response.py">HealthCheckResponse</a></code>
 
 # Webhooks
 

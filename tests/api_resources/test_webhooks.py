@@ -21,7 +21,7 @@ class TestWebhooks:
     @parametrize
     def test_method_create(self, client: Anyformat) -> None:
         webhook = client.webhooks.create(
-            url="https://example.com",
+            url="https://example.com/webhooks/anyformat",
         )
         assert_matches_type(WebhookCreateResponse, webhook, path=["response"])
 
@@ -29,8 +29,8 @@ class TestWebhooks:
     @parametrize
     def test_method_create_with_all_params(self, client: Anyformat) -> None:
         webhook = client.webhooks.create(
-            url="https://example.com",
-            events=["string"],
+            url="https://example.com/webhooks/anyformat",
+            events=["extraction.completed", "extraction.failed"],
         )
         assert_matches_type(WebhookCreateResponse, webhook, path=["response"])
 
@@ -38,7 +38,7 @@ class TestWebhooks:
     @parametrize
     def test_raw_response_create(self, client: Anyformat) -> None:
         response = client.webhooks.with_raw_response.create(
-            url="https://example.com",
+            url="https://example.com/webhooks/anyformat",
         )
 
         assert response.is_closed is True
@@ -50,7 +50,7 @@ class TestWebhooks:
     @parametrize
     def test_streaming_response_create(self, client: Anyformat) -> None:
         with client.webhooks.with_streaming_response.create(
-            url="https://example.com",
+            url="https://example.com/webhooks/anyformat",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -140,7 +140,7 @@ class TestAsyncWebhooks:
     @parametrize
     async def test_method_create(self, async_client: AsyncAnyformat) -> None:
         webhook = await async_client.webhooks.create(
-            url="https://example.com",
+            url="https://example.com/webhooks/anyformat",
         )
         assert_matches_type(WebhookCreateResponse, webhook, path=["response"])
 
@@ -148,8 +148,8 @@ class TestAsyncWebhooks:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncAnyformat) -> None:
         webhook = await async_client.webhooks.create(
-            url="https://example.com",
-            events=["string"],
+            url="https://example.com/webhooks/anyformat",
+            events=["extraction.completed", "extraction.failed"],
         )
         assert_matches_type(WebhookCreateResponse, webhook, path=["response"])
 
@@ -157,7 +157,7 @@ class TestAsyncWebhooks:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncAnyformat) -> None:
         response = await async_client.webhooks.with_raw_response.create(
-            url="https://example.com",
+            url="https://example.com/webhooks/anyformat",
         )
 
         assert response.is_closed is True
@@ -169,7 +169,7 @@ class TestAsyncWebhooks:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncAnyformat) -> None:
         async with async_client.webhooks.with_streaming_response.create(
-            url="https://example.com",
+            url="https://example.com/webhooks/anyformat",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
