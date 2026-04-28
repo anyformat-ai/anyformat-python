@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.5.0 (2026-04-28)
+
+Full Changelog: [v0.4.0...v0.5.0](https://github.com/anyformat-ai/anyformat-python/compare/v0.4.0...v0.5.0)
+
+### Features
+
+* **api:** api update ([d583403](https://github.com/anyformat-ai/anyformat-python/commit/d583403245d57b74aa1e3d891362c5eb5f8d0245))
+* support setting headers via env ([26247f6](https://github.com/anyformat-ai/anyformat-python/commit/26247f6b59fb80740b6bac524ce417f5fcd7c416))
+
+
+### Bug Fixes
+
+* use correct field name format for multipart file arrays ([f354a66](https://github.com/anyformat-ai/anyformat-python/commit/f354a66156ec1f92b453a8d4211afcf9860ba55c))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([4675c66](https://github.com/anyformat-ai/anyformat-python/commit/4675c667a347e625973fa560d76901803ad36db8))
+
 ## 0.4.0 (2026-04-21)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/anyformat-ai/anyformat-python/compare/v0.3.0...v0.4.0)
