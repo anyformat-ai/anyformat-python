@@ -66,7 +66,13 @@ class WorkflowsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Workflow:
-        """Create a new workflow."""
+        """
+        Create a new extraction workflow.
+
+        Workflows define what data to extract from documents. After creating a workflow,
+        configure its extraction fields in the
+        [AnyFormat dashboard](https://app.anyformat.ai).
+        """
         return self._post(
             "/v2/workflows/",
             options=make_request_options(
@@ -87,7 +93,8 @@ class WorkflowsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Workflow:
         """
-        Get workflow by ID.
+        Retrieve a single workflow by its ID, including its configured extraction
+        fields.
 
         Args:
           extra_headers: Send extra headers
@@ -124,7 +131,9 @@ class WorkflowsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkflowListResponse:
         """
-        List workflows with pagination.
+        List all workflows in your organization with pagination.
+
+        Workflows can be filtered by status and sorted by any field.
 
         Args:
           extra_headers: Send extra headers
@@ -168,7 +177,9 @@ class WorkflowsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Delete workflow by ID.
+        Delete a workflow and all associated file collections and extraction results.
+
+        This action is irreversible.
 
         Args:
           extra_headers: Send extra headers
@@ -203,7 +214,13 @@ class WorkflowsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkflowCreateFileResponse:
         """
-        Upload files to a workflow, creating a file collection.
+        Upload one or more files to a workflow, creating a new file collection.
+
+        Use this when you want to upload files without immediately running extraction.
+        To upload and extract in one step, use `POST /v2/workflows/{workflow_id}/run/`
+        instead.
+
+        Supported file types: PDF, PNG, JPG, TIFF, TXT, DOCX, XLSX, CSV, and more.
 
         Args:
           extra_headers: Send extra headers
@@ -242,10 +259,16 @@ class WorkflowsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
-        Get processing results for a file collection.
+        Retrieve the extraction results for a file collection.
 
-        Returns the backend collection results with internal metadata stripped. Returns
-        412 if processing is not yet complete.
+        Returns the structured data extracted from each file, including field values,
+        confidence scores, and source evidence (text excerpts and page numbers). Also
+        includes a `verification_url` linking to the AnyFormat dashboard for human
+        review.
+
+        Returns **412 Precondition Failed** if the extraction is still in progress. Poll
+        this endpoint until you receive a 200 response, or use webhooks
+        (`extraction.completed` event) to be notified when processing finishes.
 
         Args:
           extra_headers: Send extra headers
@@ -287,6 +310,10 @@ class WorkflowsResource(SyncAPIResource):
     ) -> WorkflowListFilesResponse:
         """
         List file collections for a workflow.
+
+        A file collection groups one or more uploaded files together. Each collection
+        has a status indicating the extraction progress: `pending`, `processing`,
+        `completed`, or `failed`.
 
         Args:
           extra_headers: Send extra headers
@@ -331,7 +358,11 @@ class WorkflowsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkflowListRunsResponse:
         """
-        List extraction runs for a workflow, identified by collection UUID.
+        List all extraction runs for a workflow with pagination.
+
+        Each run corresponds to a file collection that was processed by the workflow.
+        Use the run's `id` (collection UUID) with
+        `GET /v2/workflows/{workflow_id}/files/{id}/results/` to fetch detailed results.
 
         Args:
           extra_headers: Send extra headers
@@ -376,7 +407,15 @@ class WorkflowsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkflowRunResponse:
         """
-        Execute workflow — returns collection UUID.
+        Upload a file and immediately run the extraction workflow on it.
+
+        This is the primary endpoint for document extraction. It creates a file
+        collection, uploads the file, and starts extraction in one step. The response
+        includes a collection `id` that you can use to poll for results via
+        `GET /v2/workflows/{workflow_id}/files/{collection_id}/results/`.
+
+        Provide the file as a binary upload in the `file` field, or send raw text in the
+        `text` field for text-only extraction.
 
         Args:
           extra_headers: Send extra headers
@@ -422,7 +461,11 @@ class WorkflowsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkflowUploadResponse:
         """
-        Upload file without executing workflow.
+        Upload a file to a workflow without running extraction.
+
+        Use this when you want to stage files for later processing. For
+        upload-and-extract in one step, use `POST /v2/workflows/{workflow_id}/run/`
+        instead.
 
         Args:
           extra_headers: Send extra headers
@@ -485,7 +528,13 @@ class AsyncWorkflowsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Workflow:
-        """Create a new workflow."""
+        """
+        Create a new extraction workflow.
+
+        Workflows define what data to extract from documents. After creating a workflow,
+        configure its extraction fields in the
+        [AnyFormat dashboard](https://app.anyformat.ai).
+        """
         return await self._post(
             "/v2/workflows/",
             options=make_request_options(
@@ -506,7 +555,8 @@ class AsyncWorkflowsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Workflow:
         """
-        Get workflow by ID.
+        Retrieve a single workflow by its ID, including its configured extraction
+        fields.
 
         Args:
           extra_headers: Send extra headers
@@ -543,7 +593,9 @@ class AsyncWorkflowsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkflowListResponse:
         """
-        List workflows with pagination.
+        List all workflows in your organization with pagination.
+
+        Workflows can be filtered by status and sorted by any field.
 
         Args:
           extra_headers: Send extra headers
@@ -587,7 +639,9 @@ class AsyncWorkflowsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Delete workflow by ID.
+        Delete a workflow and all associated file collections and extraction results.
+
+        This action is irreversible.
 
         Args:
           extra_headers: Send extra headers
@@ -622,7 +676,13 @@ class AsyncWorkflowsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkflowCreateFileResponse:
         """
-        Upload files to a workflow, creating a file collection.
+        Upload one or more files to a workflow, creating a new file collection.
+
+        Use this when you want to upload files without immediately running extraction.
+        To upload and extract in one step, use `POST /v2/workflows/{workflow_id}/run/`
+        instead.
+
+        Supported file types: PDF, PNG, JPG, TIFF, TXT, DOCX, XLSX, CSV, and more.
 
         Args:
           extra_headers: Send extra headers
@@ -661,10 +721,16 @@ class AsyncWorkflowsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
-        Get processing results for a file collection.
+        Retrieve the extraction results for a file collection.
 
-        Returns the backend collection results with internal metadata stripped. Returns
-        412 if processing is not yet complete.
+        Returns the structured data extracted from each file, including field values,
+        confidence scores, and source evidence (text excerpts and page numbers). Also
+        includes a `verification_url` linking to the AnyFormat dashboard for human
+        review.
+
+        Returns **412 Precondition Failed** if the extraction is still in progress. Poll
+        this endpoint until you receive a 200 response, or use webhooks
+        (`extraction.completed` event) to be notified when processing finishes.
 
         Args:
           extra_headers: Send extra headers
@@ -706,6 +772,10 @@ class AsyncWorkflowsResource(AsyncAPIResource):
     ) -> WorkflowListFilesResponse:
         """
         List file collections for a workflow.
+
+        A file collection groups one or more uploaded files together. Each collection
+        has a status indicating the extraction progress: `pending`, `processing`,
+        `completed`, or `failed`.
 
         Args:
           extra_headers: Send extra headers
@@ -750,7 +820,11 @@ class AsyncWorkflowsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkflowListRunsResponse:
         """
-        List extraction runs for a workflow, identified by collection UUID.
+        List all extraction runs for a workflow with pagination.
+
+        Each run corresponds to a file collection that was processed by the workflow.
+        Use the run's `id` (collection UUID) with
+        `GET /v2/workflows/{workflow_id}/files/{id}/results/` to fetch detailed results.
 
         Args:
           extra_headers: Send extra headers
@@ -795,7 +869,15 @@ class AsyncWorkflowsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkflowRunResponse:
         """
-        Execute workflow — returns collection UUID.
+        Upload a file and immediately run the extraction workflow on it.
+
+        This is the primary endpoint for document extraction. It creates a file
+        collection, uploads the file, and starts extraction in one step. The response
+        includes a collection `id` that you can use to poll for results via
+        `GET /v2/workflows/{workflow_id}/files/{collection_id}/results/`.
+
+        Provide the file as a binary upload in the `file` field, or send raw text in the
+        `text` field for text-only extraction.
 
         Args:
           extra_headers: Send extra headers
@@ -841,7 +923,11 @@ class AsyncWorkflowsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkflowUploadResponse:
         """
-        Upload file without executing workflow.
+        Upload a file to a workflow without running extraction.
+
+        Use this when you want to stage files for later processing. For
+        upload-and-extract in one step, use `POST /v2/workflows/{workflow_id}/run/`
+        instead.
 
         Args:
           extra_headers: Send extra headers

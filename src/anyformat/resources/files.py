@@ -20,7 +20,10 @@ __all__ = ["FilesResource", "AsyncFilesResource"]
 
 
 class FilesResource(SyncAPIResource):
-    """File collection management."""
+    """File collections group uploaded documents and track their extraction progress.
+
+    Upload files, check status, and retrieve extraction results.
+    """
 
     @cached_property
     def with_raw_response(self) -> FilesResourceWithRawResponse:
@@ -53,7 +56,10 @@ class FilesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Delete a file collection and all its files.
+        Delete a file collection and all its files permanently.
+
+        This removes all uploaded files and any extraction results associated with the
+        collection. This action is irreversible.
 
         Args:
           extra_headers: Send extra headers
@@ -77,7 +83,10 @@ class FilesResource(SyncAPIResource):
 
 
 class AsyncFilesResource(AsyncAPIResource):
-    """File collection management."""
+    """File collections group uploaded documents and track their extraction progress.
+
+    Upload files, check status, and retrieve extraction results.
+    """
 
     @cached_property
     def with_raw_response(self) -> AsyncFilesResourceWithRawResponse:
@@ -110,7 +119,10 @@ class AsyncFilesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Delete a file collection and all its files.
+        Delete a file collection and all its files permanently.
+
+        This removes all uploaded files and any extraction results associated with the
+        collection. This action is irreversible.
 
         Args:
           extra_headers: Send extra headers

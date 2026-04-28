@@ -20,7 +20,11 @@ from ._types import (
     RequestOptions,
     not_given,
 )
-from ._utils import is_given, get_async_library
+from ._utils import (
+    is_given,
+    is_mapping_t,
+    get_async_library,
+)
 from ._compat import cached_property
 from ._models import SecurityOptions
 from ._version import __version__
@@ -91,6 +95,15 @@ class Anyformat(SyncAPIClient):
         if base_url is None:
             base_url = f"https://api.anyformat.ai"
 
+        custom_headers_env = os.environ.get("ANYFORMAT_CUSTOM_HEADERS")
+        if custom_headers_env is not None:
+            parsed: dict[str, str] = {}
+            for line in custom_headers_env.split("\n"):
+                colon = line.find(":")
+                if colon >= 0:
+                    parsed[line[:colon].strip()] = line[colon + 1 :].strip()
+            default_headers = {**parsed, **(default_headers if is_mapping_t(default_headers) else {})}
+
         super().__init__(
             version=__version__,
             base_url=base_url,
@@ -104,21 +117,27 @@ class Anyformat(SyncAPIClient):
 
     @cached_property
     def health(self) -> HealthResource:
-        """Health checks."""
+        """Health check endpoints to verify API availability."""
         from .resources.health import HealthResource
 
         return HealthResource(self)
 
     @cached_property
     def webhooks(self) -> WebhooksResource:
-        """Webhook subscriptions for async notifications."""
+        """Webhook subscriptions for asynchronous event notifications.
+
+        Get notified when extractions complete or fail.
+        """
         from .resources.webhooks import WebhooksResource
 
         return WebhooksResource(self)
 
     @cached_property
     def files(self) -> FilesResource:
-        """File collection management."""
+        """File collections group uploaded documents and track their extraction progress.
+
+        Upload files, check status, and retrieve extraction results.
+        """
         from .resources.files import FilesResource
 
         return FilesResource(self)
@@ -298,6 +317,15 @@ class AsyncAnyformat(AsyncAPIClient):
         if base_url is None:
             base_url = f"https://api.anyformat.ai"
 
+        custom_headers_env = os.environ.get("ANYFORMAT_CUSTOM_HEADERS")
+        if custom_headers_env is not None:
+            parsed: dict[str, str] = {}
+            for line in custom_headers_env.split("\n"):
+                colon = line.find(":")
+                if colon >= 0:
+                    parsed[line[:colon].strip()] = line[colon + 1 :].strip()
+            default_headers = {**parsed, **(default_headers if is_mapping_t(default_headers) else {})}
+
         super().__init__(
             version=__version__,
             base_url=base_url,
@@ -311,21 +339,27 @@ class AsyncAnyformat(AsyncAPIClient):
 
     @cached_property
     def health(self) -> AsyncHealthResource:
-        """Health checks."""
+        """Health check endpoints to verify API availability."""
         from .resources.health import AsyncHealthResource
 
         return AsyncHealthResource(self)
 
     @cached_property
     def webhooks(self) -> AsyncWebhooksResource:
-        """Webhook subscriptions for async notifications."""
+        """Webhook subscriptions for asynchronous event notifications.
+
+        Get notified when extractions complete or fail.
+        """
         from .resources.webhooks import AsyncWebhooksResource
 
         return AsyncWebhooksResource(self)
 
     @cached_property
     def files(self) -> AsyncFilesResource:
-        """File collection management."""
+        """File collections group uploaded documents and track their extraction progress.
+
+        Upload files, check status, and retrieve extraction results.
+        """
         from .resources.files import AsyncFilesResource
 
         return AsyncFilesResource(self)
@@ -473,21 +507,27 @@ class AnyformatWithRawResponse:
 
     @cached_property
     def health(self) -> health.HealthResourceWithRawResponse:
-        """Health checks."""
+        """Health check endpoints to verify API availability."""
         from .resources.health import HealthResourceWithRawResponse
 
         return HealthResourceWithRawResponse(self._client.health)
 
     @cached_property
     def webhooks(self) -> webhooks.WebhooksResourceWithRawResponse:
-        """Webhook subscriptions for async notifications."""
+        """Webhook subscriptions for asynchronous event notifications.
+
+        Get notified when extractions complete or fail.
+        """
         from .resources.webhooks import WebhooksResourceWithRawResponse
 
         return WebhooksResourceWithRawResponse(self._client.webhooks)
 
     @cached_property
     def files(self) -> files.FilesResourceWithRawResponse:
-        """File collection management."""
+        """File collections group uploaded documents and track their extraction progress.
+
+        Upload files, check status, and retrieve extraction results.
+        """
         from .resources.files import FilesResourceWithRawResponse
 
         return FilesResourceWithRawResponse(self._client.files)
@@ -507,21 +547,27 @@ class AsyncAnyformatWithRawResponse:
 
     @cached_property
     def health(self) -> health.AsyncHealthResourceWithRawResponse:
-        """Health checks."""
+        """Health check endpoints to verify API availability."""
         from .resources.health import AsyncHealthResourceWithRawResponse
 
         return AsyncHealthResourceWithRawResponse(self._client.health)
 
     @cached_property
     def webhooks(self) -> webhooks.AsyncWebhooksResourceWithRawResponse:
-        """Webhook subscriptions for async notifications."""
+        """Webhook subscriptions for asynchronous event notifications.
+
+        Get notified when extractions complete or fail.
+        """
         from .resources.webhooks import AsyncWebhooksResourceWithRawResponse
 
         return AsyncWebhooksResourceWithRawResponse(self._client.webhooks)
 
     @cached_property
     def files(self) -> files.AsyncFilesResourceWithRawResponse:
-        """File collection management."""
+        """File collections group uploaded documents and track their extraction progress.
+
+        Upload files, check status, and retrieve extraction results.
+        """
         from .resources.files import AsyncFilesResourceWithRawResponse
 
         return AsyncFilesResourceWithRawResponse(self._client.files)
@@ -541,21 +587,27 @@ class AnyformatWithStreamedResponse:
 
     @cached_property
     def health(self) -> health.HealthResourceWithStreamingResponse:
-        """Health checks."""
+        """Health check endpoints to verify API availability."""
         from .resources.health import HealthResourceWithStreamingResponse
 
         return HealthResourceWithStreamingResponse(self._client.health)
 
     @cached_property
     def webhooks(self) -> webhooks.WebhooksResourceWithStreamingResponse:
-        """Webhook subscriptions for async notifications."""
+        """Webhook subscriptions for asynchronous event notifications.
+
+        Get notified when extractions complete or fail.
+        """
         from .resources.webhooks import WebhooksResourceWithStreamingResponse
 
         return WebhooksResourceWithStreamingResponse(self._client.webhooks)
 
     @cached_property
     def files(self) -> files.FilesResourceWithStreamingResponse:
-        """File collection management."""
+        """File collections group uploaded documents and track their extraction progress.
+
+        Upload files, check status, and retrieve extraction results.
+        """
         from .resources.files import FilesResourceWithStreamingResponse
 
         return FilesResourceWithStreamingResponse(self._client.files)
@@ -575,21 +627,27 @@ class AsyncAnyformatWithStreamedResponse:
 
     @cached_property
     def health(self) -> health.AsyncHealthResourceWithStreamingResponse:
-        """Health checks."""
+        """Health check endpoints to verify API availability."""
         from .resources.health import AsyncHealthResourceWithStreamingResponse
 
         return AsyncHealthResourceWithStreamingResponse(self._client.health)
 
     @cached_property
     def webhooks(self) -> webhooks.AsyncWebhooksResourceWithStreamingResponse:
-        """Webhook subscriptions for async notifications."""
+        """Webhook subscriptions for asynchronous event notifications.
+
+        Get notified when extractions complete or fail.
+        """
         from .resources.webhooks import AsyncWebhooksResourceWithStreamingResponse
 
         return AsyncWebhooksResourceWithStreamingResponse(self._client.webhooks)
 
     @cached_property
     def files(self) -> files.AsyncFilesResourceWithStreamingResponse:
-        """File collection management."""
+        """File collections group uploaded documents and track their extraction progress.
+
+        Upload files, check status, and retrieve extraction results.
+        """
         from .resources.files import AsyncFilesResourceWithStreamingResponse
 
         return AsyncFilesResourceWithStreamingResponse(self._client.files)

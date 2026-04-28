@@ -14,12 +14,13 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.health_check_response import HealthCheckResponse
 
 __all__ = ["HealthResource", "AsyncHealthResource"]
 
 
 class HealthResource(SyncAPIResource):
-    """Health checks."""
+    """Health check endpoints to verify API availability."""
 
     @cached_property
     def with_raw_response(self) -> HealthResourceWithRawResponse:
@@ -49,24 +50,24 @@ class HealthResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
-        """Health check endpoint.
-
-        Returns 200 OK if the service is running.
+    ) -> HealthCheckResponse:
+        """Returns 200 OK if the service is running.
 
         No authentication required.
+
+        Use this endpoint to verify API connectivity before making authenticated calls.
         """
         return self._get(
             "/health/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=HealthCheckResponse,
         )
 
 
 class AsyncHealthResource(AsyncAPIResource):
-    """Health checks."""
+    """Health check endpoints to verify API availability."""
 
     @cached_property
     def with_raw_response(self) -> AsyncHealthResourceWithRawResponse:
@@ -96,19 +97,19 @@ class AsyncHealthResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
-        """Health check endpoint.
-
-        Returns 200 OK if the service is running.
+    ) -> HealthCheckResponse:
+        """Returns 200 OK if the service is running.
 
         No authentication required.
+
+        Use this endpoint to verify API connectivity before making authenticated calls.
         """
         return await self._get(
             "/health/",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=HealthCheckResponse,
         )
 
 
