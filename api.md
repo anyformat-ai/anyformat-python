@@ -39,6 +39,7 @@ from anyformat.types import (
     Workflow,
     WorkflowListResponse,
     WorkflowCreateFileResponse,
+    WorkflowGetFileResultsResponse,
     WorkflowListFilesResponse,
     WorkflowListRunsResponse,
     WorkflowRunResponse,
@@ -53,7 +54,7 @@ Methods:
 - <code title="get /v2/workflows/">client.workflows.<a href="./src/anyformat/resources/workflows.py">list</a>(\*\*<a href="src/anyformat/types/workflow_list_params.py">params</a>) -> <a href="./src/anyformat/types/workflow_list_response.py">WorkflowListResponse</a></code>
 - <code title="delete /v2/workflows/{workflow_id}/">client.workflows.<a href="./src/anyformat/resources/workflows.py">delete</a>(workflow_id) -> None</code>
 - <code title="post /v2/workflows/{workflow_id}/files/">client.workflows.<a href="./src/anyformat/resources/workflows.py">create_file</a>(workflow_id, \*\*<a href="src/anyformat/types/workflow_create_file_params.py">params</a>) -> <a href="./src/anyformat/types/workflow_create_file_response.py">WorkflowCreateFileResponse</a></code>
-- <code title="get /v2/workflows/{workflow_id}/files/{collection_id}/results/">client.workflows.<a href="./src/anyformat/resources/workflows.py">get_file_results</a>(collection_id, \*, workflow_id) -> object</code>
+- <code title="get /v2/workflows/{workflow_id}/files/{collection_id}/results/">client.workflows.<a href="./src/anyformat/resources/workflows.py">get_file_results</a>(collection_id, \*, workflow_id) -> <a href="./src/anyformat/types/workflow_get_file_results_response.py">WorkflowGetFileResultsResponse</a></code>
 - <code title="get /v2/workflows/{workflow_id}/files/">client.workflows.<a href="./src/anyformat/resources/workflows.py">list_files</a>(workflow_id, \*\*<a href="src/anyformat/types/workflow_list_files_params.py">params</a>) -> <a href="./src/anyformat/types/workflow_list_files_response.py">WorkflowListFilesResponse</a></code>
 - <code title="get /v2/workflows/{workflow_id}/runs/">client.workflows.<a href="./src/anyformat/resources/workflows.py">list_runs</a>(workflow_id, \*\*<a href="src/anyformat/types/workflow_list_runs_params.py">params</a>) -> <a href="./src/anyformat/types/workflow_list_runs_response.py">WorkflowListRunsResponse</a></code>
 - <code title="post /v2/workflows/{workflow_id}/run/">client.workflows.<a href="./src/anyformat/resources/workflows.py">run</a>(workflow_id, \*\*<a href="src/anyformat/types/workflow_run_params.py">params</a>) -> <a href="./src/anyformat/types/workflow_run_response.py">WorkflowRunResponse</a></code>
