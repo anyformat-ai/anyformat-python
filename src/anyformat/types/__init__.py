@@ -19,3 +19,4 @@ from .workflow_create_file_params import WorkflowCreateFileParams as WorkflowCre
 from .workflow_list_runs_response import WorkflowListRunsResponse as WorkflowListRunsResponse
 from .workflow_list_files_response import WorkflowListFilesResponse as WorkflowListFilesResponse
 from .workflow_create_file_response import WorkflowCreateFileResponse as WorkflowCreateFileResponse
+from .workflow_get_file_results_response import WorkflowGetFileResultsResponse as WorkflowGetFileResultsResponse

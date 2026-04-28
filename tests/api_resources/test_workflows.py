@@ -17,6 +17,7 @@ from anyformat.types import (
     WorkflowListRunsResponse,
     WorkflowListFilesResponse,
     WorkflowCreateFileResponse,
+    WorkflowGetFileResultsResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -230,7 +231,7 @@ class TestWorkflows:
             collection_id="collection_id",
             workflow_id="workflow_id",
         )
-        assert_matches_type(object, workflow, path=["response"])
+        assert_matches_type(WorkflowGetFileResultsResponse, workflow, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -243,7 +244,7 @@ class TestWorkflows:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         workflow = response.parse()
-        assert_matches_type(object, workflow, path=["response"])
+        assert_matches_type(WorkflowGetFileResultsResponse, workflow, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -256,7 +257,7 @@ class TestWorkflows:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             workflow = response.parse()
-            assert_matches_type(object, workflow, path=["response"])
+            assert_matches_type(WorkflowGetFileResultsResponse, workflow, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -694,7 +695,7 @@ class TestAsyncWorkflows:
             collection_id="collection_id",
             workflow_id="workflow_id",
         )
-        assert_matches_type(object, workflow, path=["response"])
+        assert_matches_type(WorkflowGetFileResultsResponse, workflow, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -707,7 +708,7 @@ class TestAsyncWorkflows:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         workflow = await response.parse()
-        assert_matches_type(object, workflow, path=["response"])
+        assert_matches_type(WorkflowGetFileResultsResponse, workflow, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -720,7 +721,7 @@ class TestAsyncWorkflows:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             workflow = await response.parse()
-            assert_matches_type(object, workflow, path=["response"])
+            assert_matches_type(WorkflowGetFileResultsResponse, workflow, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

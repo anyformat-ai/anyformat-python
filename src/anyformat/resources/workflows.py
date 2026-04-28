@@ -32,6 +32,7 @@ from ..types.workflow_upload_response import WorkflowUploadResponse
 from ..types.workflow_list_runs_response import WorkflowListRunsResponse
 from ..types.workflow_list_files_response import WorkflowListFilesResponse
 from ..types.workflow_create_file_response import WorkflowCreateFileResponse
+from ..types.workflow_get_file_results_response import WorkflowGetFileResultsResponse
 
 __all__ = ["WorkflowsResource", "AsyncWorkflowsResource"]
 
@@ -257,7 +258,7 @@ class WorkflowsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> WorkflowGetFileResultsResponse:
         """
         Retrieve the extraction results for a file collection.
 
@@ -292,7 +293,7 @@ class WorkflowsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=WorkflowGetFileResultsResponse,
         )
 
     def list_files(
@@ -719,7 +720,7 @@ class AsyncWorkflowsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> WorkflowGetFileResultsResponse:
         """
         Retrieve the extraction results for a file collection.
 
@@ -754,7 +755,7 @@ class AsyncWorkflowsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=WorkflowGetFileResultsResponse,
         )
 
     async def list_files(
