@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Dict, Iterable, Optional
 
 import httpx
 
 from ..types import (
     workflow_run_params,
     workflow_list_params,
+    workflow_create_params,
     workflow_upload_params,
     workflow_list_runs_params,
     workflow_list_files_params,
@@ -60,6 +61,9 @@ class WorkflowsResource(SyncAPIResource):
     def create(
         self,
         *,
+        fields: Iterable[Dict[str, object]],
+        name: str,
+        description: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -73,11 +77,38 @@ class WorkflowsResource(SyncAPIResource):
         Workflows define what data to extract from documents. After creating a workflow,
         configure its extraction fields in the
         [AnyFormat dashboard](https://app.anyformat.ai).
+
+        Args:
+          fields: Field definitions
+
+          name: Workflow name
+
+          description: Workflow description
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
             "/v2/workflows/",
+            body=maybe_transform(
+                {
+                    "fields": fields,
+                    "name": name,
+                    "description": description,
+                },
+                workflow_create_params.WorkflowCreateParams,
+            ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=Workflow,
         )
@@ -111,7 +142,11 @@ class WorkflowsResource(SyncAPIResource):
         return self._get(
             path_template("/v2/workflows/{workflow_id}/", workflow_id=workflow_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=Workflow,
         )
@@ -162,6 +197,7 @@ class WorkflowsResource(SyncAPIResource):
                     },
                     workflow_list_params.WorkflowListParams,
                 ),
+                security={},
             ),
             cast_to=WorkflowListResponse,
         )
@@ -197,7 +233,11 @@ class WorkflowsResource(SyncAPIResource):
         return self._delete(
             path_template("/v2/workflows/{workflow_id}/", workflow_id=workflow_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=NoneType,
         )
@@ -242,7 +282,11 @@ class WorkflowsResource(SyncAPIResource):
             path_template("/v2/workflows/{workflow_id}/files/", workflow_id=workflow_id),
             body=maybe_transform({"files": files}, workflow_create_file_params.WorkflowCreateFileParams),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=WorkflowCreateFileResponse,
         )
@@ -291,7 +335,11 @@ class WorkflowsResource(SyncAPIResource):
                 collection_id=collection_id,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=WorkflowGetFileResultsResponse,
         )
@@ -341,6 +389,7 @@ class WorkflowsResource(SyncAPIResource):
                     },
                     workflow_list_files_params.WorkflowListFilesParams,
                 ),
+                security={},
             ),
             cast_to=WorkflowListFilesResponse,
         )
@@ -390,6 +439,7 @@ class WorkflowsResource(SyncAPIResource):
                     },
                     workflow_list_runs_params.WorkflowListRunsParams,
                 ),
+                security={},
             ),
             cast_to=WorkflowListRunsResponse,
         )
@@ -443,7 +493,11 @@ class WorkflowsResource(SyncAPIResource):
                 workflow_run_params.WorkflowRunParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=WorkflowRunResponse,
         )
@@ -493,7 +547,11 @@ class WorkflowsResource(SyncAPIResource):
                 workflow_upload_params.WorkflowUploadParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=WorkflowUploadResponse,
         )
@@ -522,6 +580,9 @@ class AsyncWorkflowsResource(AsyncAPIResource):
     async def create(
         self,
         *,
+        fields: Iterable[Dict[str, object]],
+        name: str,
+        description: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -535,11 +596,38 @@ class AsyncWorkflowsResource(AsyncAPIResource):
         Workflows define what data to extract from documents. After creating a workflow,
         configure its extraction fields in the
         [AnyFormat dashboard](https://app.anyformat.ai).
+
+        Args:
+          fields: Field definitions
+
+          name: Workflow name
+
+          description: Workflow description
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
             "/v2/workflows/",
+            body=await async_maybe_transform(
+                {
+                    "fields": fields,
+                    "name": name,
+                    "description": description,
+                },
+                workflow_create_params.WorkflowCreateParams,
+            ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=Workflow,
         )
@@ -573,7 +661,11 @@ class AsyncWorkflowsResource(AsyncAPIResource):
         return await self._get(
             path_template("/v2/workflows/{workflow_id}/", workflow_id=workflow_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=Workflow,
         )
@@ -624,6 +716,7 @@ class AsyncWorkflowsResource(AsyncAPIResource):
                     },
                     workflow_list_params.WorkflowListParams,
                 ),
+                security={},
             ),
             cast_to=WorkflowListResponse,
         )
@@ -659,7 +752,11 @@ class AsyncWorkflowsResource(AsyncAPIResource):
         return await self._delete(
             path_template("/v2/workflows/{workflow_id}/", workflow_id=workflow_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=NoneType,
         )
@@ -704,7 +801,11 @@ class AsyncWorkflowsResource(AsyncAPIResource):
             path_template("/v2/workflows/{workflow_id}/files/", workflow_id=workflow_id),
             body=await async_maybe_transform({"files": files}, workflow_create_file_params.WorkflowCreateFileParams),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=WorkflowCreateFileResponse,
         )
@@ -753,7 +854,11 @@ class AsyncWorkflowsResource(AsyncAPIResource):
                 collection_id=collection_id,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=WorkflowGetFileResultsResponse,
         )
@@ -803,6 +908,7 @@ class AsyncWorkflowsResource(AsyncAPIResource):
                     },
                     workflow_list_files_params.WorkflowListFilesParams,
                 ),
+                security={},
             ),
             cast_to=WorkflowListFilesResponse,
         )
@@ -852,6 +958,7 @@ class AsyncWorkflowsResource(AsyncAPIResource):
                     },
                     workflow_list_runs_params.WorkflowListRunsParams,
                 ),
+                security={},
             ),
             cast_to=WorkflowListRunsResponse,
         )
@@ -905,7 +1012,11 @@ class AsyncWorkflowsResource(AsyncAPIResource):
                 workflow_run_params.WorkflowRunParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=WorkflowRunResponse,
         )
@@ -955,7 +1066,11 @@ class AsyncWorkflowsResource(AsyncAPIResource):
                 workflow_upload_params.WorkflowUploadParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=WorkflowUploadResponse,
         )
