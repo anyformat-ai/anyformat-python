@@ -49,7 +49,7 @@ from anyformat.types import (
 
 Methods:
 
-- <code title="post /v2/workflows/">client.workflows.<a href="./src/anyformat/resources/workflows.py">create</a>() -> <a href="./src/anyformat/types/workflow.py">Workflow</a></code>
+- <code title="post /v2/workflows/">client.workflows.<a href="./src/anyformat/resources/workflows.py">create</a>(\*\*<a href="src/anyformat/types/workflow_create_params.py">params</a>) -> <a href="./src/anyformat/types/workflow.py">Workflow</a></code>
 - <code title="get /v2/workflows/{workflow_id}/">client.workflows.<a href="./src/anyformat/resources/workflows.py">retrieve</a>(workflow_id) -> <a href="./src/anyformat/types/workflow.py">Workflow</a></code>
 - <code title="get /v2/workflows/">client.workflows.<a href="./src/anyformat/resources/workflows.py">list</a>(\*\*<a href="src/anyformat/types/workflow_list_params.py">params</a>) -> <a href="./src/anyformat/types/workflow_list_response.py">WorkflowListResponse</a></code>
 - <code title="delete /v2/workflows/{workflow_id}/">client.workflows.<a href="./src/anyformat/resources/workflows.py">delete</a>(workflow_id) -> None</code>
