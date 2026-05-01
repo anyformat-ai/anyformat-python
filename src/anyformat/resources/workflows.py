@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Dict, Iterable, Optional
 
 import httpx
 
 from ..types import (
     workflow_run_params,
     workflow_list_params,
+    workflow_create_params,
     workflow_upload_params,
     workflow_list_runs_params,
     workflow_list_files_params,
@@ -32,6 +33,7 @@ from ..types.workflow_upload_response import WorkflowUploadResponse
 from ..types.workflow_list_runs_response import WorkflowListRunsResponse
 from ..types.workflow_list_files_response import WorkflowListFilesResponse
 from ..types.workflow_create_file_response import WorkflowCreateFileResponse
+from ..types.workflow_get_file_results_response import WorkflowGetFileResultsResponse
 
 __all__ = ["WorkflowsResource", "AsyncWorkflowsResource"]
 
@@ -59,6 +61,9 @@ class WorkflowsResource(SyncAPIResource):
     def create(
         self,
         *,
+        fields: Iterable[Dict[str, object]],
+        name: str,
+        description: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -72,11 +77,38 @@ class WorkflowsResource(SyncAPIResource):
         Workflows define what data to extract from documents. After creating a workflow,
         configure its extraction fields in the
         [AnyFormat dashboard](https://app.anyformat.ai).
+
+        Args:
+          fields: Field definitions
+
+          name: Workflow name
+
+          description: Workflow description
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
             "/v2/workflows/",
+            body=maybe_transform(
+                {
+                    "fields": fields,
+                    "name": name,
+                    "description": description,
+                },
+                workflow_create_params.WorkflowCreateParams,
+            ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=Workflow,
         )
@@ -110,7 +142,11 @@ class WorkflowsResource(SyncAPIResource):
         return self._get(
             path_template("/v2/workflows/{workflow_id}/", workflow_id=workflow_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=Workflow,
         )
@@ -161,6 +197,7 @@ class WorkflowsResource(SyncAPIResource):
                     },
                     workflow_list_params.WorkflowListParams,
                 ),
+                security={},
             ),
             cast_to=WorkflowListResponse,
         )
@@ -196,7 +233,11 @@ class WorkflowsResource(SyncAPIResource):
         return self._delete(
             path_template("/v2/workflows/{workflow_id}/", workflow_id=workflow_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=NoneType,
         )
@@ -241,7 +282,11 @@ class WorkflowsResource(SyncAPIResource):
             path_template("/v2/workflows/{workflow_id}/files/", workflow_id=workflow_id),
             body=maybe_transform({"files": files}, workflow_create_file_params.WorkflowCreateFileParams),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=WorkflowCreateFileResponse,
         )
@@ -257,7 +302,7 @@ class WorkflowsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> WorkflowGetFileResultsResponse:
         """
         Retrieve the extraction results for a file collection.
 
@@ -266,9 +311,19 @@ class WorkflowsResource(SyncAPIResource):
         includes a `verification_url` linking to the AnyFormat dashboard for human
         review.
 
-        Returns **412 Precondition Failed** if the extraction is still in progress. Poll
-        this endpoint until you receive a 200 response, or use webhooks
-        (`extraction.completed` event) to be notified when processing finishes.
+        Possible non-200 responses:
+
+        - **412 `PRECONDITION_FAILED`** — extraction still in progress; retry with
+          backoff.
+        - **422 `EXTRACTION_FAILED`** — extraction did not complete successfully;
+          terminal. Polling will not transition the collection out of this state.
+          Possible next steps: review the document, retry the upload, or open the
+          collection in the AnyFormat dashboard for more context.
+        - **422 `EXTRACTION_CANCELLED`** — extraction was cancelled; terminal. Possible
+          next steps: review the document, retry the upload, or open the collection in
+          the AnyFormat dashboard.
+
+        Use webhooks (`extraction.completed` event) to avoid polling.
 
         Args:
           extra_headers: Send extra headers
@@ -290,9 +345,13 @@ class WorkflowsResource(SyncAPIResource):
                 collection_id=collection_id,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
-            cast_to=object,
+            cast_to=WorkflowGetFileResultsResponse,
         )
 
     def list_files(
@@ -340,6 +399,7 @@ class WorkflowsResource(SyncAPIResource):
                     },
                     workflow_list_files_params.WorkflowListFilesParams,
                 ),
+                security={},
             ),
             cast_to=WorkflowListFilesResponse,
         )
@@ -389,6 +449,7 @@ class WorkflowsResource(SyncAPIResource):
                     },
                     workflow_list_runs_params.WorkflowListRunsParams,
                 ),
+                security={},
             ),
             cast_to=WorkflowListRunsResponse,
         )
@@ -442,7 +503,11 @@ class WorkflowsResource(SyncAPIResource):
                 workflow_run_params.WorkflowRunParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=WorkflowRunResponse,
         )
@@ -492,7 +557,11 @@ class WorkflowsResource(SyncAPIResource):
                 workflow_upload_params.WorkflowUploadParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=WorkflowUploadResponse,
         )
@@ -521,6 +590,9 @@ class AsyncWorkflowsResource(AsyncAPIResource):
     async def create(
         self,
         *,
+        fields: Iterable[Dict[str, object]],
+        name: str,
+        description: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -534,11 +606,38 @@ class AsyncWorkflowsResource(AsyncAPIResource):
         Workflows define what data to extract from documents. After creating a workflow,
         configure its extraction fields in the
         [AnyFormat dashboard](https://app.anyformat.ai).
+
+        Args:
+          fields: Field definitions
+
+          name: Workflow name
+
+          description: Workflow description
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
             "/v2/workflows/",
+            body=await async_maybe_transform(
+                {
+                    "fields": fields,
+                    "name": name,
+                    "description": description,
+                },
+                workflow_create_params.WorkflowCreateParams,
+            ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=Workflow,
         )
@@ -572,7 +671,11 @@ class AsyncWorkflowsResource(AsyncAPIResource):
         return await self._get(
             path_template("/v2/workflows/{workflow_id}/", workflow_id=workflow_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=Workflow,
         )
@@ -623,6 +726,7 @@ class AsyncWorkflowsResource(AsyncAPIResource):
                     },
                     workflow_list_params.WorkflowListParams,
                 ),
+                security={},
             ),
             cast_to=WorkflowListResponse,
         )
@@ -658,7 +762,11 @@ class AsyncWorkflowsResource(AsyncAPIResource):
         return await self._delete(
             path_template("/v2/workflows/{workflow_id}/", workflow_id=workflow_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=NoneType,
         )
@@ -703,7 +811,11 @@ class AsyncWorkflowsResource(AsyncAPIResource):
             path_template("/v2/workflows/{workflow_id}/files/", workflow_id=workflow_id),
             body=await async_maybe_transform({"files": files}, workflow_create_file_params.WorkflowCreateFileParams),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=WorkflowCreateFileResponse,
         )
@@ -719,7 +831,7 @@ class AsyncWorkflowsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> WorkflowGetFileResultsResponse:
         """
         Retrieve the extraction results for a file collection.
 
@@ -728,9 +840,19 @@ class AsyncWorkflowsResource(AsyncAPIResource):
         includes a `verification_url` linking to the AnyFormat dashboard for human
         review.
 
-        Returns **412 Precondition Failed** if the extraction is still in progress. Poll
-        this endpoint until you receive a 200 response, or use webhooks
-        (`extraction.completed` event) to be notified when processing finishes.
+        Possible non-200 responses:
+
+        - **412 `PRECONDITION_FAILED`** — extraction still in progress; retry with
+          backoff.
+        - **422 `EXTRACTION_FAILED`** — extraction did not complete successfully;
+          terminal. Polling will not transition the collection out of this state.
+          Possible next steps: review the document, retry the upload, or open the
+          collection in the AnyFormat dashboard for more context.
+        - **422 `EXTRACTION_CANCELLED`** — extraction was cancelled; terminal. Possible
+          next steps: review the document, retry the upload, or open the collection in
+          the AnyFormat dashboard.
+
+        Use webhooks (`extraction.completed` event) to avoid polling.
 
         Args:
           extra_headers: Send extra headers
@@ -752,9 +874,13 @@ class AsyncWorkflowsResource(AsyncAPIResource):
                 collection_id=collection_id,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
-            cast_to=object,
+            cast_to=WorkflowGetFileResultsResponse,
         )
 
     async def list_files(
@@ -802,6 +928,7 @@ class AsyncWorkflowsResource(AsyncAPIResource):
                     },
                     workflow_list_files_params.WorkflowListFilesParams,
                 ),
+                security={},
             ),
             cast_to=WorkflowListFilesResponse,
         )
@@ -851,6 +978,7 @@ class AsyncWorkflowsResource(AsyncAPIResource):
                     },
                     workflow_list_runs_params.WorkflowListRunsParams,
                 ),
+                security={},
             ),
             cast_to=WorkflowListRunsResponse,
         )
@@ -904,7 +1032,11 @@ class AsyncWorkflowsResource(AsyncAPIResource):
                 workflow_run_params.WorkflowRunParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=WorkflowRunResponse,
         )
@@ -954,7 +1086,11 @@ class AsyncWorkflowsResource(AsyncAPIResource):
                 workflow_upload_params.WorkflowUploadParams,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=WorkflowUploadResponse,
         )

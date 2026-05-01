@@ -76,7 +76,11 @@ class FilesResource(SyncAPIResource):
         return self._delete(
             path_template("/v2/files/{collection_id}/", collection_id=collection_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=NoneType,
         )
@@ -139,7 +143,11 @@ class AsyncFilesResource(AsyncAPIResource):
         return await self._delete(
             path_template("/v2/files/{collection_id}/", collection_id=collection_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                security={},
             ),
             cast_to=NoneType,
         )

@@ -9,6 +9,7 @@ from .health_check_response import HealthCheckResponse as HealthCheckResponse
 from .webhook_create_params import WebhookCreateParams as WebhookCreateParams
 from .webhook_list_response import WebhookListResponse as WebhookListResponse
 from .workflow_run_response import WorkflowRunResponse as WorkflowRunResponse
+from .workflow_create_params import WorkflowCreateParams as WorkflowCreateParams
 from .workflow_list_response import WorkflowListResponse as WorkflowListResponse
 from .workflow_upload_params import WorkflowUploadParams as WorkflowUploadParams
 from .webhook_create_response import WebhookCreateResponse as WebhookCreateResponse
@@ -19,3 +20,4 @@ from .workflow_create_file_params import WorkflowCreateFileParams as WorkflowCre
 from .workflow_list_runs_response import WorkflowListRunsResponse as WorkflowListRunsResponse
 from .workflow_list_files_response import WorkflowListFilesResponse as WorkflowListFilesResponse
 from .workflow_create_file_response import WorkflowCreateFileResponse as WorkflowCreateFileResponse
+from .workflow_get_file_results_response import WorkflowGetFileResultsResponse as WorkflowGetFileResultsResponse

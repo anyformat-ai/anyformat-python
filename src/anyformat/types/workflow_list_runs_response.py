@@ -21,7 +21,10 @@ class Result(BaseModel):
     """
 
     status: str
-    """Processing status: `pending`, `processing`, `completed`, or `failed`."""
+    """
+    Processing status: `pending`, `queued`, `in_progress`, `processed`, `error`, or
+    `cancelled`.
+    """
 
     created_at: Optional[datetime] = None
     """Timestamp when the run started (ISO 8601)."""

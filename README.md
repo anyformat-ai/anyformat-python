@@ -34,12 +34,9 @@ pip install anyformat
 The full API of this library can be found in [api.md](api.md).
 
 ```python
-import os
 from anyformat import Anyformat
 
-client = Anyformat(
-    api_key=os.environ.get("ANYFORMAT_API_KEY"),  # This is the default and can be omitted
-)
+client = Anyformat()
 
 response = client.workflows.run(
     workflow_id="0686bb97-8c30-70f0-8000-97669e000eb8",
@@ -58,13 +55,10 @@ so that your API Key is not stored in source control.
 Simply import `AsyncAnyformat` instead of `Anyformat` and use `await` with each API call:
 
 ```python
-import os
 import asyncio
 from anyformat import AsyncAnyformat
 
-client = AsyncAnyformat(
-    api_key=os.environ.get("ANYFORMAT_API_KEY"),  # This is the default and can be omitted
-)
+client = AsyncAnyformat()
 
 
 async def main() -> None:
@@ -94,7 +88,6 @@ pip install anyformat[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
-import os
 import asyncio
 from anyformat import DefaultAioHttpClient
 from anyformat import AsyncAnyformat
@@ -102,7 +95,6 @@ from anyformat import AsyncAnyformat
 
 async def main() -> None:
     async with AsyncAnyformat(
-        api_key=os.environ.get("ANYFORMAT_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
         response = await client.workflows.run(
