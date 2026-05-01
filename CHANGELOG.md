@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.6.0 (2026-05-01)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/anyformat-ai/anyformat-python/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* **api:** api update ([6c04df9](https://github.com/anyformat-ai/anyformat-python/commit/6c04df95280727d23361783f23152a83bde18be2))
+* **api:** api update ([aac9c9f](https://github.com/anyformat-ai/anyformat-python/commit/aac9c9f7dc21181eb1679ecd2c7145419a68bf37))
+* **api:** api update ([8b223fa](https://github.com/anyformat-ai/anyformat-python/commit/8b223fa97f46d38c8a39f60bf5b7753c4e840d20))
+
+
+### Chores
+
+* **internal:** reformat pyproject.toml ([d69c4c8](https://github.com/anyformat-ai/anyformat-python/commit/d69c4c8c066ba41544ed522f16392200714906d6))
+
 ## 0.5.0 (2026-04-28)
 
 Full Changelog: [v0.4.0...v0.5.0](https://github.com/anyformat-ai/anyformat-python/compare/v0.4.0...v0.5.0)
