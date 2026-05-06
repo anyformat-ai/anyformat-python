@@ -7,13 +7,34 @@ from .._models import BaseModel
 
 __all__ = [
     "WorkflowGetFileResultsResponse",
+    "Classification",
     "Extraction",
     "ExtractionExtractedField",
     "ExtractionExtractedFieldEvidence",
     "ExtractionUnionMember1ExtractionUnionMember1Item",
     "ExtractionUnionMember1ExtractionUnionMember1ItemEvidence",
     "Parse",
+    "Split",
+    "SplitFile",
+    "SplitPartition",
+    "SplitPartitionFile",
 ]
+
+
+class Classification(BaseModel):
+    """One classifier verdict for the collection."""
+
+    category: str
+    """The category the document was classified as."""
+
+    confidence: float
+    """0-100 model confidence in the verdict."""
+
+    evidence: Optional[str] = None
+    """Free-form evidence text (the snippets the classifier cited).
+
+    `null` when none captured.
+    """
 
 
 class ExtractionExtractedFieldEvidence(BaseModel):
@@ -120,6 +141,63 @@ class Parse(BaseModel):
     """
 
 
+class SplitFile(BaseModel):
+    """A file's contribution of pages to a split or partition. 1-indexed."""
+
+    file_id: str
+    """The file's UUID."""
+
+    file_name: str
+    """The file's display name."""
+
+    pages: List[int]
+    """1-indexed page numbers from this file."""
+
+
+class SplitPartitionFile(BaseModel):
+    """A file's contribution of pages to a split or partition. 1-indexed."""
+
+    file_id: str
+    """The file's UUID."""
+
+    file_name: str
+    """The file's display name."""
+
+    pages: List[int]
+    """1-indexed page numbers from this file."""
+
+
+class SplitPartition(BaseModel):
+    """A partition value within a split (e.g. `1234-5678` under `Account Holdings`)."""
+
+    confidence: int
+    """0-100 minimum confidence across the partition's ranges."""
+
+    files: List[SplitPartitionFile]
+
+    name: str
+    """The partition value (free-form string)."""
+
+
+class Split(BaseModel):
+    """
+    A category-level split: which pages of which files fall under it, plus
+    any partitions inside it. Extraction data lives under `extractions[]` —
+    join by `split_name`.
+    """
+
+    confidence: int
+    """0-100 aggregate confidence (min across partitions)."""
+
+    files: List[SplitFile]
+    """Per-file page lists, union of all partitions."""
+
+    name: str
+    """The split's category name."""
+
+    partitions: Optional[List[SplitPartition]] = None
+
+
 class WorkflowGetFileResultsResponse(BaseModel):
     """Canonical response shape for the file-collection results endpoint.
 
@@ -133,16 +211,33 @@ class WorkflowGetFileResultsResponse(BaseModel):
     Same value as the `id` returned by `POST /v2/workflows/{wid}/run/`.
     """
 
-    extraction: Optional[Dict[str, Extraction]] = None
-    """Extracted fields keyed by field name.
+    classifications: Optional[List[Classification]] = None
+    """Per-classifier-node verdicts. Empty when the workflow has no classifier."""
 
-    `null` for parse-only workflows. Always present in the response. Each value is
-    either a scalar field (`ExtractedField`) or a list of object-field rows
-    (`list[dict[str, ExtractedField]]`) for compound fields like line items.
+    extraction: Optional[Dict[str, Extraction]] = None
+    """**Deprecated** — use `extractions` instead.
+
+    Extracted fields keyed by field name, populated only for linear workflows
+    (single extract node, no splitter). `null` for split workflows; read
+    `extractions[]` instead.
+    """
+
+    extractions: Optional[List[Extraction]] = None
+    """Flat list of extraction datapoints.
+
+    Linear workflows produce one entry with `split_name=null` and `partition=null`.
+    Split workflows produce one entry per (split, partition). Empty when no
+    extraction has run yet.
     """
 
     parse: Optional[Parse] = None
     """Parsed markdown for a file."""
+
+    splits: Optional[List[Split]] = None
+    """Splitter output: category-level geometry with optional partitions.
+
+    Empty when the workflow has no splitter.
+    """
 
     verification_url: Optional[str] = None
     """Link to the AnyFormat dashboard for human review of this collection's results.
