@@ -32,8 +32,8 @@ class TestWorkflows:
         workflow = client.workflows.create(
             fields=[
                 {
-                    "data_type": "bar",
-                    "name": "bar",
+                    "data_type": "string",
+                    "name": "invoice_number",
                 }
             ],
             name="Invoice Processing",
@@ -46,8 +46,8 @@ class TestWorkflows:
         workflow = client.workflows.create(
             fields=[
                 {
-                    "data_type": "bar",
-                    "name": "bar",
+                    "data_type": "string",
+                    "name": "invoice_number",
                 }
             ],
             name="Invoice Processing",
@@ -61,8 +61,8 @@ class TestWorkflows:
         response = client.workflows.with_raw_response.create(
             fields=[
                 {
-                    "data_type": "bar",
-                    "name": "bar",
+                    "data_type": "string",
+                    "name": "invoice_number",
                 }
             ],
             name="Invoice Processing",
@@ -79,8 +79,8 @@ class TestWorkflows:
         with client.workflows.with_streaming_response.create(
             fields=[
                 {
-                    "data_type": "bar",
-                    "name": "bar",
+                    "data_type": "string",
+                    "name": "invoice_number",
                 }
             ],
             name="Invoice Processing",
@@ -535,8 +535,8 @@ class TestAsyncWorkflows:
         workflow = await async_client.workflows.create(
             fields=[
                 {
-                    "data_type": "bar",
-                    "name": "bar",
+                    "data_type": "string",
+                    "name": "invoice_number",
                 }
             ],
             name="Invoice Processing",
@@ -549,8 +549,8 @@ class TestAsyncWorkflows:
         workflow = await async_client.workflows.create(
             fields=[
                 {
-                    "data_type": "bar",
-                    "name": "bar",
+                    "data_type": "string",
+                    "name": "invoice_number",
                 }
             ],
             name="Invoice Processing",
@@ -564,8 +564,8 @@ class TestAsyncWorkflows:
         response = await async_client.workflows.with_raw_response.create(
             fields=[
                 {
-                    "data_type": "bar",
-                    "name": "bar",
+                    "data_type": "string",
+                    "name": "invoice_number",
                 }
             ],
             name="Invoice Processing",
@@ -582,8 +582,8 @@ class TestAsyncWorkflows:
         async with async_client.workflows.with_streaming_response.create(
             fields=[
                 {
-                    "data_type": "bar",
-                    "name": "bar",
+                    "data_type": "string",
+                    "name": "invoice_number",
                 }
             ],
             name="Invoice Processing",
