@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Iterable, Optional
+from typing import Iterable, Optional
 
 import httpx
 
@@ -61,7 +61,7 @@ class WorkflowsResource(SyncAPIResource):
     def create(
         self,
         *,
-        fields: Iterable[Dict[str, object]],
+        fields: Iterable[object],
         name: str,
         description: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -79,7 +79,7 @@ class WorkflowsResource(SyncAPIResource):
         [AnyFormat dashboard](https://app.anyformat.ai).
 
         Args:
-          fields: Field definitions
+          fields: Field definitions. Each entry's shape is determined by its `data_type`.
 
           name: Workflow name
 
@@ -590,7 +590,7 @@ class AsyncWorkflowsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        fields: Iterable[Dict[str, object]],
+        fields: Iterable[object],
         name: str,
         description: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -608,7 +608,7 @@ class AsyncWorkflowsResource(AsyncAPIResource):
         [AnyFormat dashboard](https://app.anyformat.ai).
 
         Args:
-          fields: Field definitions
+          fields: Field definitions. Each entry's shape is determined by its `data_type`.
 
           name: Workflow name
 

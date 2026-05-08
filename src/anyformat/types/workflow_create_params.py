@@ -2,15 +2,15 @@
 
 from __future__ import annotations
 
-from typing import Dict, Iterable, Optional
+from typing import Iterable, Optional
 from typing_extensions import Required, TypedDict
 
 __all__ = ["WorkflowCreateParams"]
 
 
 class WorkflowCreateParams(TypedDict, total=False):
-    fields: Required[Iterable[Dict[str, object]]]
-    """Field definitions"""
+    fields: Required[Iterable[object]]
+    """Field definitions. Each entry's shape is determined by its `data_type`."""
 
     name: Required[str]
     """Workflow name"""
