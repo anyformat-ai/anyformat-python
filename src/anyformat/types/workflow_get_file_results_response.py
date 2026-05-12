@@ -14,6 +14,8 @@ __all__ = [
     "ExtractionUnionMember1ExtractionUnionMember1Item",
     "ExtractionUnionMember1ExtractionUnionMember1ItemEvidence",
     "Parse",
+    "ParseBlock",
+    "ParseBlockHyperlink",
     "Split",
     "SplitFile",
     "SplitPartition",
@@ -130,6 +132,76 @@ Extraction: TypeAlias = Union[
 ]
 
 
+class ParseBlockHyperlink(BaseModel):
+    """A hyperlink found inside a block's content."""
+
+    text: str
+    """The display text of the link."""
+
+    uri: str
+    """The link target (URL, mailto:, etc.)."""
+
+
+class ParseBlock(BaseModel):
+    """
+    One semantic block of a parsed document — a structured alternative to
+    pattern-matching against `<section>` tags inside `markdown`.
+
+    All blocks expose the common fields (`id`, `type`, `page`, `bbox`,
+    `confidence`, `content`). Type-specific structured data lives in the
+    optional fields (`rows` for tables, `image_base64` for pictures).
+    Consumers can switch on `type` to access the per-type fields, or treat
+    `content` as the universal fallback.
+    """
+
+    id: str
+    """Stable block identifier in the form `p<page>_b<index>`."""
+
+    bbox: Dict[str, float]
+    """
+    Normalised bounding box in [0, 1] page coordinates with keys
+    `x0`/`y0`/`x1`/`y1`.
+    """
+
+    content: str
+    """
+    Raw section body — markdown for text/title blocks, HTML for tables,
+    `<figure-content>` for pictures.
+    """
+
+    layout_confidence: float
+    """0-100 YOLO layout detection confidence for this block."""
+
+    page: int
+    """1-indexed page number this block belongs to."""
+
+    type: str
+    """Semantic type: `text`, `title`, `section-header`, `table`, `picture`, `other`."""
+
+    hyperlinks: Optional[List[ParseBlockHyperlink]] = None
+    """Hyperlinks found in the content via `[text](uri)` markdown syntax."""
+
+    image_base64: Optional[str] = None
+    """
+    Inline base64-encoded cropped image for `type=picture` blocks when the response
+    was assembled from the visual markdown variant. `null` for non-picture blocks or
+    when the raw variant was used.
+    """
+
+    parse_confidence: Optional[float] = None
+    """0-100 parse confidence calibrated from LLM logprobs.
+
+    `null` when logprobs were unavailable (e.g. text-bytes strategy).
+    """
+
+    rows: Optional[List[List[Dict[str, str]]]] = None
+    """2D array of table cells for `type=table` blocks — each cell is
+    `{cell_id, text}`.
+
+    `null` for non-table blocks.
+    """
+
+
 class Parse(BaseModel):
     """Parsed markdown for a file."""
 
@@ -138,6 +210,35 @@ class Parse(BaseModel):
     Document content rendered as structured markdown (with `<DOCUMENT>` /
     `<section>` tags, embedded images for the `visual` variant). `null` if parsing
     failed.
+    """
+
+    blocks: Optional[List[ParseBlock]] = None
+    """
+    Structured per-block representation of the parsed document — derived from
+    `markdown` at retrieval time. One entry per `<section>` in document order, with
+    type-specific structured data (`rows` for tables, `image_base64` for pictures)
+    surfaced as first-class fields so consumers don't have to HTML-parse.
+    """
+
+    layout_confidence: Optional[float] = None
+    """
+    Document-level YOLO layout confidence on a 0-100 scale, char-weighted mean
+    across all blocks. `null` if no annotated sections.
+    """
+
+    parse_confidence: Optional[float] = None
+    """
+    Document-level parse confidence on a 0-100 scale, char-weighted mean of
+    per-block LLM logprob scores. `null` when no blocks have logprob-based
+    confidence.
+    """
+
+    text: Optional[str] = None
+    """
+    Plain markdown text with structural tags stripped — `<DOCUMENT>`, `<section>`,
+    `<img>`, and `<figure-content>` wrappers removed, leaving the human-readable
+    content only. Useful when feeding the parsed output into an LLM or a search
+    index that doesn't need the block-level metadata. `null` if `markdown` is null.
     """
 
 

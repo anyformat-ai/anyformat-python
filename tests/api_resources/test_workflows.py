@@ -33,6 +33,7 @@ class TestWorkflows:
             fields=[
                 {
                     "data_type": "string",
+                    "description": "x",
                     "name": "invoice_number",
                 }
             ],
@@ -47,6 +48,7 @@ class TestWorkflows:
             fields=[
                 {
                     "data_type": "string",
+                    "description": "x",
                     "name": "invoice_number",
                 }
             ],
@@ -62,6 +64,7 @@ class TestWorkflows:
             fields=[
                 {
                     "data_type": "string",
+                    "description": "x",
                     "name": "invoice_number",
                 }
             ],
@@ -80,6 +83,7 @@ class TestWorkflows:
             fields=[
                 {
                     "data_type": "string",
+                    "description": "x",
                     "name": "invoice_number",
                 }
             ],
@@ -536,6 +540,7 @@ class TestAsyncWorkflows:
             fields=[
                 {
                     "data_type": "string",
+                    "description": "x",
                     "name": "invoice_number",
                 }
             ],
@@ -550,6 +555,7 @@ class TestAsyncWorkflows:
             fields=[
                 {
                     "data_type": "string",
+                    "description": "x",
                     "name": "invoice_number",
                 }
             ],
@@ -565,6 +571,7 @@ class TestAsyncWorkflows:
             fields=[
                 {
                     "data_type": "string",
+                    "description": "x",
                     "name": "invoice_number",
                 }
             ],
@@ -583,6 +590,7 @@ class TestAsyncWorkflows:
             fields=[
                 {
                     "data_type": "string",
+                    "description": "x",
                     "name": "invoice_number",
                 }
             ],
