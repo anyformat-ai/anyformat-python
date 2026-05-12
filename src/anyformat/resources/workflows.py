@@ -61,7 +61,7 @@ class WorkflowsResource(SyncAPIResource):
     def create(
         self,
         *,
-        fields: Iterable[object],
+        fields: Iterable[workflow_create_params.Field],
         name: str,
         description: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -590,7 +590,7 @@ class AsyncWorkflowsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        fields: Iterable[object],
+        fields: Iterable[workflow_create_params.Field],
         name: str,
         description: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
