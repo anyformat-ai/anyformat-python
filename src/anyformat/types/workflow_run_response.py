@@ -24,5 +24,12 @@ class WorkflowRunResponse(BaseModel):
     not that extraction is complete).
     """
 
+    version_id: str
+    """
+    The workflow version this run was bound to (the latest version at submission
+    time). Lets callers verify which schema produced the results — useful right
+    after an edit.
+    """
+
     workflow_id: str
     """The UUID of the workflow that was executed."""
