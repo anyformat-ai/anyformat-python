@@ -182,10 +182,10 @@ class ParseBlock(BaseModel):
     """Hyperlinks found in the content via `[text](uri)` markdown syntax."""
 
     image_base64: Optional[str] = None
-    """
-    Inline base64-encoded cropped image for `type=picture` blocks when the response
-    was assembled from the visual markdown variant. `null` for non-picture blocks or
-    when the raw variant was used.
+    """Inline base64-encoded cropped image for `type=picture` blocks.
+
+    Currently `null` for all blocks — image hydration is performed client-side by
+    the SDK consumer.
     """
 
     parse_confidence: Optional[float] = None
@@ -208,8 +208,8 @@ class Parse(BaseModel):
     markdown: Optional[str] = None
     """
     Document content rendered as structured markdown (with `<DOCUMENT>` /
-    `<section>` tags, embedded images for the `visual` variant). `null` if parsing
-    failed.
+    `<section>` tags). Image hydration for picture/figure blocks happens
+    client-side. `null` if parsing failed.
     """
 
     blocks: Optional[List[ParseBlock]] = None
