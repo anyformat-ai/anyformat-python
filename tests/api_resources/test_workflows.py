@@ -30,14 +30,13 @@ class TestWorkflows:
     @parametrize
     def test_method_create(self, client: Anyformat) -> None:
         workflow = client.workflows.create(
-            fields=[
+            name="Invoice or receipt",
+            nodes=[
                 {
-                    "data_type": "string",
-                    "description": "x",
-                    "name": "invoice_number",
+                    "id": "x",
+                    "type": "parse",
                 }
             ],
-            name="Invoice Processing",
         )
         assert_matches_type(Workflow, workflow, path=["response"])
 
@@ -45,15 +44,27 @@ class TestWorkflows:
     @parametrize
     def test_method_create_with_all_params(self, client: Anyformat) -> None:
         workflow = client.workflows.create(
-            fields=[
+            name="Invoice or receipt",
+            nodes=[
                 {
-                    "data_type": "string",
-                    "description": "x",
-                    "name": "invoice_number",
+                    "id": "x",
+                    "type": "parse",
+                    "effort": "low",
+                    "engine": "Fast",
+                    "figure_enhancement_enabled": True,
+                    "mode": "standard",
+                    "prompt_hint": "prompt_hint",
+                    "visual_grounding_enabled": True,
                 }
             ],
-            name="Invoice Processing",
-            description="Extracts invoice number, vendor, total, and line items.",
+            description="description",
+            edges=[
+                {
+                    "source": "x",
+                    "target": "x",
+                    "branch": "branch",
+                }
+            ],
         )
         assert_matches_type(Workflow, workflow, path=["response"])
 
@@ -61,14 +72,13 @@ class TestWorkflows:
     @parametrize
     def test_raw_response_create(self, client: Anyformat) -> None:
         response = client.workflows.with_raw_response.create(
-            fields=[
+            name="Invoice or receipt",
+            nodes=[
                 {
-                    "data_type": "string",
-                    "description": "x",
-                    "name": "invoice_number",
+                    "id": "x",
+                    "type": "parse",
                 }
             ],
-            name="Invoice Processing",
         )
 
         assert response.is_closed is True
@@ -80,14 +90,13 @@ class TestWorkflows:
     @parametrize
     def test_streaming_response_create(self, client: Anyformat) -> None:
         with client.workflows.with_streaming_response.create(
-            fields=[
+            name="Invoice or receipt",
+            nodes=[
                 {
-                    "data_type": "string",
-                    "description": "x",
-                    "name": "invoice_number",
+                    "id": "x",
+                    "type": "parse",
                 }
             ],
-            name="Invoice Processing",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -537,14 +546,13 @@ class TestAsyncWorkflows:
     @parametrize
     async def test_method_create(self, async_client: AsyncAnyformat) -> None:
         workflow = await async_client.workflows.create(
-            fields=[
+            name="Invoice or receipt",
+            nodes=[
                 {
-                    "data_type": "string",
-                    "description": "x",
-                    "name": "invoice_number",
+                    "id": "x",
+                    "type": "parse",
                 }
             ],
-            name="Invoice Processing",
         )
         assert_matches_type(Workflow, workflow, path=["response"])
 
@@ -552,15 +560,27 @@ class TestAsyncWorkflows:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncAnyformat) -> None:
         workflow = await async_client.workflows.create(
-            fields=[
+            name="Invoice or receipt",
+            nodes=[
                 {
-                    "data_type": "string",
-                    "description": "x",
-                    "name": "invoice_number",
+                    "id": "x",
+                    "type": "parse",
+                    "effort": "low",
+                    "engine": "Fast",
+                    "figure_enhancement_enabled": True,
+                    "mode": "standard",
+                    "prompt_hint": "prompt_hint",
+                    "visual_grounding_enabled": True,
                 }
             ],
-            name="Invoice Processing",
-            description="Extracts invoice number, vendor, total, and line items.",
+            description="description",
+            edges=[
+                {
+                    "source": "x",
+                    "target": "x",
+                    "branch": "branch",
+                }
+            ],
         )
         assert_matches_type(Workflow, workflow, path=["response"])
 
@@ -568,14 +588,13 @@ class TestAsyncWorkflows:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncAnyformat) -> None:
         response = await async_client.workflows.with_raw_response.create(
-            fields=[
+            name="Invoice or receipt",
+            nodes=[
                 {
-                    "data_type": "string",
-                    "description": "x",
-                    "name": "invoice_number",
+                    "id": "x",
+                    "type": "parse",
                 }
             ],
-            name="Invoice Processing",
         )
 
         assert response.is_closed is True
@@ -587,14 +606,13 @@ class TestAsyncWorkflows:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncAnyformat) -> None:
         async with async_client.workflows.with_streaming_response.create(
-            fields=[
+            name="Invoice or receipt",
+            nodes=[
                 {
-                    "data_type": "string",
-                    "description": "x",
-                    "name": "invoice_number",
+                    "id": "x",
+                    "type": "parse",
                 }
             ],
-            name="Invoice Processing",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

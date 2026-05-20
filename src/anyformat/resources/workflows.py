@@ -61,9 +61,10 @@ class WorkflowsResource(SyncAPIResource):
     def create(
         self,
         *,
-        fields: Iterable[workflow_create_params.Field],
         name: str,
+        nodes: Iterable[workflow_create_params.Node],
         description: Optional[str] | Omit = omit,
+        edges: Iterable[workflow_create_params.Edge] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -72,19 +73,13 @@ class WorkflowsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Workflow:
         """
-        Create a new extraction workflow.
+        Create a workflow from a strongly-typed graph (atomic).
 
-        Workflows define what data to extract from documents. After creating a workflow,
-        configure its extraction fields in the
-        [AnyFormat dashboard](https://app.anyformat.ai).
+        Provide an explicit list of typed `nodes` (parse / classify / splitter /
+        extract) and `edges` between them. The full workflow — fields, nodes, routing —
+        is created in a single transaction.
 
         Args:
-          fields: Field definitions. Each entry's shape is determined by its `data_type`.
-
-          name: Workflow name
-
-          description: Workflow description
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -97,9 +92,10 @@ class WorkflowsResource(SyncAPIResource):
             "/v2/workflows/",
             body=maybe_transform(
                 {
-                    "fields": fields,
                     "name": name,
+                    "nodes": nodes,
                     "description": description,
+                    "edges": edges,
                 },
                 workflow_create_params.WorkflowCreateParams,
             ),
@@ -590,9 +586,10 @@ class AsyncWorkflowsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        fields: Iterable[workflow_create_params.Field],
         name: str,
+        nodes: Iterable[workflow_create_params.Node],
         description: Optional[str] | Omit = omit,
+        edges: Iterable[workflow_create_params.Edge] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -601,19 +598,13 @@ class AsyncWorkflowsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Workflow:
         """
-        Create a new extraction workflow.
+        Create a workflow from a strongly-typed graph (atomic).
 
-        Workflows define what data to extract from documents. After creating a workflow,
-        configure its extraction fields in the
-        [AnyFormat dashboard](https://app.anyformat.ai).
+        Provide an explicit list of typed `nodes` (parse / classify / splitter /
+        extract) and `edges` between them. The full workflow — fields, nodes, routing —
+        is created in a single transaction.
 
         Args:
-          fields: Field definitions. Each entry's shape is determined by its `data_type`.
-
-          name: Workflow name
-
-          description: Workflow description
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -626,9 +617,10 @@ class AsyncWorkflowsResource(AsyncAPIResource):
             "/v2/workflows/",
             body=await async_maybe_transform(
                 {
-                    "fields": fields,
                     "name": name,
+                    "nodes": nodes,
                     "description": description,
+                    "edges": edges,
                 },
                 workflow_create_params.WorkflowCreateParams,
             ),
