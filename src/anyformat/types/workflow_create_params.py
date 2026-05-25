@@ -40,6 +40,29 @@ __all__ = [
     "NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldEnumFieldDefEnumOption",
     "NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldMultiSelectFieldDef",
     "NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldMultiSelectFieldDefEnumOption",
+    "NodeExtractNodeLookupSchema",
+    "NodeExtractNodeLookupSchemaStringFieldDef",
+    "NodeExtractNodeLookupSchemaIntegerFieldDef",
+    "NodeExtractNodeLookupSchemaFloatFieldDef",
+    "NodeExtractNodeLookupSchemaBooleanFieldDef",
+    "NodeExtractNodeLookupSchemaDateFieldDef",
+    "NodeExtractNodeLookupSchemaDatetimeFieldDef",
+    "NodeExtractNodeLookupSchemaEnumFieldDef",
+    "NodeExtractNodeLookupSchemaEnumFieldDefEnumOption",
+    "NodeExtractNodeLookupSchemaMultiSelectFieldDef",
+    "NodeExtractNodeLookupSchemaMultiSelectFieldDefEnumOption",
+    "NodeExtractNodeLookupSchemaObjectFieldDef",
+    "NodeExtractNodeLookupSchemaObjectFieldDefNestedField",
+    "NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldStringFieldDef",
+    "NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldIntegerFieldDef",
+    "NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldFloatFieldDef",
+    "NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldBooleanFieldDef",
+    "NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldDateFieldDef",
+    "NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldDatetimeFieldDef",
+    "NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldEnumFieldDef",
+    "NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldEnumFieldDefEnumOption",
+    "NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldMultiSelectFieldDef",
+    "NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldMultiSelectFieldDefEnumOption",
     "NodeValidateNode",
     "NodeValidateNodeRule",
     "Edge",
@@ -62,16 +85,15 @@ class NodeParseNode(TypedDict, total=False):
 
     type: Required[Literal["parse"]]
 
-    effort: Optional[Literal["low", "mid", "accurate"]]
-    """Effort preset for agentic mode (low/mid/accurate).
+    effort: Literal["low", "mid", "accurate"]
+    """Effort preset for the agentic parser.
 
-    Defaults to 'mid' when `mode='agentic'` and not set; must be omitted when
-    `mode='standard'`.
+    Only consulted when `mode='agentic'`; ignored for `mode='standard'`.
     """
 
     engine: Literal["Fast", "Performant"]
 
-    figure_enhancement_enabled: bool
+    figure_enhancement: bool
 
     mode: Literal["standard", "agentic"]
 
@@ -111,7 +133,7 @@ class NodeSplitterNodeRule(TypedDict, total=False):
 
     name: Required[str]
 
-    partition_key: Required[str]
+    partition_key: str
 
 
 class NodeSplitterNode(TypedDict, total=False):
@@ -364,10 +386,247 @@ NodeExtractNodeExtractionSchemaField: TypeAlias = Union[
 
 
 class NodeExtractNodeExtractionSchema(TypedDict, total=False):
-    """Schema for the fields this node extracts."""
+    """Schema for the fields this node extracts.
+
+    Required. The backend executor populates this from the ORM field tree before constructing the typed node; nothing else should be able to build an ExtractNode without it.
+    """
 
     fields: Required[Iterable[NodeExtractNodeExtractionSchemaField]]
     """Field definitions making up this extract's output."""
+
+
+class NodeExtractNodeLookupSchemaStringFieldDef(TypedDict, total=False):
+    data_type: Required[Literal["string"]]
+
+    description: Required[str]
+    """Free-form description shown to the extraction model."""
+
+    name: Required[str]
+    """Field name. Used as the key in the extraction response."""
+
+
+class NodeExtractNodeLookupSchemaIntegerFieldDef(TypedDict, total=False):
+    data_type: Required[Literal["integer"]]
+
+    description: Required[str]
+    """Free-form description shown to the extraction model."""
+
+    name: Required[str]
+    """Field name. Used as the key in the extraction response."""
+
+
+class NodeExtractNodeLookupSchemaFloatFieldDef(TypedDict, total=False):
+    data_type: Required[Literal["float"]]
+
+    description: Required[str]
+    """Free-form description shown to the extraction model."""
+
+    name: Required[str]
+    """Field name. Used as the key in the extraction response."""
+
+
+class NodeExtractNodeLookupSchemaBooleanFieldDef(TypedDict, total=False):
+    data_type: Required[Literal["boolean"]]
+
+    description: Required[str]
+    """Free-form description shown to the extraction model."""
+
+    name: Required[str]
+    """Field name. Used as the key in the extraction response."""
+
+
+class NodeExtractNodeLookupSchemaDateFieldDef(TypedDict, total=False):
+    data_type: Required[Literal["date"]]
+
+    description: Required[str]
+    """Free-form description shown to the extraction model."""
+
+    name: Required[str]
+    """Field name. Used as the key in the extraction response."""
+
+
+class NodeExtractNodeLookupSchemaDatetimeFieldDef(TypedDict, total=False):
+    data_type: Required[Literal["datetime"]]
+
+    description: Required[str]
+    """Free-form description shown to the extraction model."""
+
+    name: Required[str]
+    """Field name. Used as the key in the extraction response."""
+
+
+class NodeExtractNodeLookupSchemaEnumFieldDefEnumOption(TypedDict, total=False):
+    description: Required[str]
+    """Free-form description shown to the model."""
+
+    name: Required[str]
+
+
+class NodeExtractNodeLookupSchemaEnumFieldDef(TypedDict, total=False):
+    data_type: Required[Literal["enum"]]
+
+    description: Required[str]
+    """Free-form description shown to the extraction model."""
+
+    enum_options: Required[Iterable[NodeExtractNodeLookupSchemaEnumFieldDefEnumOption]]
+
+    name: Required[str]
+    """Field name. Used as the key in the extraction response."""
+
+
+class NodeExtractNodeLookupSchemaMultiSelectFieldDefEnumOption(TypedDict, total=False):
+    description: Required[str]
+    """Free-form description shown to the model."""
+
+    name: Required[str]
+
+
+class NodeExtractNodeLookupSchemaMultiSelectFieldDef(TypedDict, total=False):
+    data_type: Required[Literal["multi_select"]]
+
+    description: Required[str]
+    """Free-form description shown to the extraction model."""
+
+    enum_options: Required[Iterable[NodeExtractNodeLookupSchemaMultiSelectFieldDefEnumOption]]
+
+    name: Required[str]
+    """Field name. Used as the key in the extraction response."""
+
+
+class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldStringFieldDef(TypedDict, total=False):
+    data_type: Required[Literal["string"]]
+
+    description: Required[str]
+    """Free-form description shown to the extraction model."""
+
+    name: Required[str]
+    """Field name. Used as the key in the extraction response."""
+
+
+class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldIntegerFieldDef(TypedDict, total=False):
+    data_type: Required[Literal["integer"]]
+
+    description: Required[str]
+    """Free-form description shown to the extraction model."""
+
+    name: Required[str]
+    """Field name. Used as the key in the extraction response."""
+
+
+class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldFloatFieldDef(TypedDict, total=False):
+    data_type: Required[Literal["float"]]
+
+    description: Required[str]
+    """Free-form description shown to the extraction model."""
+
+    name: Required[str]
+    """Field name. Used as the key in the extraction response."""
+
+
+class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldBooleanFieldDef(TypedDict, total=False):
+    data_type: Required[Literal["boolean"]]
+
+    description: Required[str]
+    """Free-form description shown to the extraction model."""
+
+    name: Required[str]
+    """Field name. Used as the key in the extraction response."""
+
+
+class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldDateFieldDef(TypedDict, total=False):
+    data_type: Required[Literal["date"]]
+
+    description: Required[str]
+    """Free-form description shown to the extraction model."""
+
+    name: Required[str]
+    """Field name. Used as the key in the extraction response."""
+
+
+class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldDatetimeFieldDef(TypedDict, total=False):
+    data_type: Required[Literal["datetime"]]
+
+    description: Required[str]
+    """Free-form description shown to the extraction model."""
+
+    name: Required[str]
+    """Field name. Used as the key in the extraction response."""
+
+
+class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldEnumFieldDefEnumOption(TypedDict, total=False):
+    description: Required[str]
+    """Free-form description shown to the model."""
+
+    name: Required[str]
+
+
+class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldEnumFieldDef(TypedDict, total=False):
+    data_type: Required[Literal["enum"]]
+
+    description: Required[str]
+    """Free-form description shown to the extraction model."""
+
+    enum_options: Required[Iterable[NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldEnumFieldDefEnumOption]]
+
+    name: Required[str]
+    """Field name. Used as the key in the extraction response."""
+
+
+class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldMultiSelectFieldDefEnumOption(TypedDict, total=False):
+    description: Required[str]
+    """Free-form description shown to the model."""
+
+    name: Required[str]
+
+
+class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldMultiSelectFieldDef(TypedDict, total=False):
+    data_type: Required[Literal["multi_select"]]
+
+    description: Required[str]
+    """Free-form description shown to the extraction model."""
+
+    enum_options: Required[Iterable[NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldMultiSelectFieldDefEnumOption]]
+
+    name: Required[str]
+    """Field name. Used as the key in the extraction response."""
+
+
+NodeExtractNodeLookupSchemaObjectFieldDefNestedField: TypeAlias = Union[
+    NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldStringFieldDef,
+    NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldIntegerFieldDef,
+    NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldFloatFieldDef,
+    NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldBooleanFieldDef,
+    NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldDateFieldDef,
+    NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldDatetimeFieldDef,
+    NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldEnumFieldDef,
+    NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldMultiSelectFieldDef,
+    object,
+]
+
+
+class NodeExtractNodeLookupSchemaObjectFieldDef(TypedDict, total=False):
+    data_type: Required[Literal["object"]]
+
+    description: Required[str]
+    """Free-form description shown to the extraction model."""
+
+    name: Required[str]
+    """Field name. Used as the key in the extraction response."""
+
+    nested_fields: Required[Iterable[NodeExtractNodeLookupSchemaObjectFieldDefNestedField]]
+
+
+NodeExtractNodeLookupSchema: TypeAlias = Union[
+    NodeExtractNodeLookupSchemaStringFieldDef,
+    NodeExtractNodeLookupSchemaIntegerFieldDef,
+    NodeExtractNodeLookupSchemaFloatFieldDef,
+    NodeExtractNodeLookupSchemaBooleanFieldDef,
+    NodeExtractNodeLookupSchemaDateFieldDef,
+    NodeExtractNodeLookupSchemaDatetimeFieldDef,
+    NodeExtractNodeLookupSchemaEnumFieldDef,
+    NodeExtractNodeLookupSchemaMultiSelectFieldDef,
+    NodeExtractNodeLookupSchemaObjectFieldDef,
+]
 
 
 class NodeExtractNode(TypedDict, total=False):
@@ -375,9 +634,33 @@ class NodeExtractNode(TypedDict, total=False):
     """Stable identifier for this node within the graph."""
 
     extraction_schema: Required[NodeExtractNodeExtractionSchema]
-    """Schema for the fields this node extracts."""
+    """Schema for the fields this node extracts.
+
+    Required. The backend executor populates this from the ORM field tree before
+    constructing the typed node; nothing else should be able to build an ExtractNode
+    without it.
+    """
 
     type: Required[Literal["extract"]]
+
+    engine: Literal["Fast", "Performant"]
+
+    lookup_files: SequenceNotStr[str]
+    """Smart-lookup reference document URIs persisted on the extract node."""
+
+    lookup_schema: Iterable[NodeExtractNodeLookupSchema]
+    """Typed schema of fields the smart-lookup pass should produce.
+
+    The _backend_ derives this from the field tree (FieldWorkflowVersion rows whose
+    source is SMART_LOOKUP) and attaches it to the node before the message hits the
+    wire — the worker then reads it directly off the node, with no DB round-trip.
+    Default empty: a node without smart-lookup fields carries an empty list.
+    """
+
+    lookup_suggestion: Optional[str]
+    """Free-form hint shown to the smart-lookup matcher."""
+
+    mode: Literal["standard", "agentic"]
 
     use_images: bool
 
