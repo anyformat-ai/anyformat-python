@@ -145,7 +145,7 @@ class ParseBlockHyperlink(BaseModel):
 class ParseBlock(BaseModel):
     """
     One semantic block of a parsed document — a structured alternative to
-    pattern-matching against `<section>` tags inside `markdown`.
+    walking `<a id></a>` anchors in `markdown`.
 
     All blocks expose the common fields (`id`, `type`, `page`, `bbox`,
     `confidence`, `content`). Type-specific structured data lives in the
@@ -206,18 +206,20 @@ class Parse(BaseModel):
     """Parsed markdown for a file."""
 
     markdown: Optional[str] = None
-    """
-    Document content rendered as structured markdown (with `<DOCUMENT>` /
-    `<section>` tags). Image hydration for picture/figure blocks happens
-    client-side. `null` if parsing failed.
+    """Document content rendered as structured markdown.
+
+    Each block is preceded by an empty `<a id="p{page}_b{idx}"></a>` anchor
+    (invisible in any markdown renderer; the id joins to `blocks[].id` and can be
+    used as an in-page link target). Image hydration for picture/figure blocks
+    happens client-side. `null` if parsing failed.
     """
 
     blocks: Optional[List[ParseBlock]] = None
-    """
-    Structured per-block representation of the parsed document — derived from
-    `markdown` at retrieval time. One entry per `<section>` in document order, with
-    type-specific structured data (`rows` for tables, `image_base64` for pictures)
-    surfaced as first-class fields so consumers don't have to HTML-parse.
+    """Structured per-block representation of the parsed document.
+
+    One entry per `<a id></a>` anchor in document order, with type-specific
+    structured data (`rows` for tables, `image_base64` for pictures) surfaced as
+    first-class fields so consumers don't have to HTML-parse.
     """
 
     layout_confidence: Optional[float] = None
@@ -235,10 +237,10 @@ class Parse(BaseModel):
 
     text: Optional[str] = None
     """
-    Plain markdown text with structural tags stripped — `<DOCUMENT>`, `<section>`,
-    `<img>`, and `<figure-content>` wrappers removed, leaving the human-readable
-    content only. Useful when feeding the parsed output into an LLM or a search
-    index that doesn't need the block-level metadata. `null` if `markdown` is null.
+    Plain markdown with structural HTML removed — `<DOCUMENT>` framing, block
+    anchors, `<img>` tags, and `<figure-content>` wrappers stripped. Useful when
+    feeding the parsed output into an LLM or a search index that doesn't need the
+    block-level metadata. `null` if `markdown` is null.
     """
 
 
