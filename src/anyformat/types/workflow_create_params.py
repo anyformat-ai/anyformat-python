@@ -18,51 +18,51 @@ __all__ = [
     "NodeExtractNode",
     "NodeExtractNodeExtractionSchema",
     "NodeExtractNodeExtractionSchemaField",
-    "NodeExtractNodeExtractionSchemaFieldStringFieldDef",
-    "NodeExtractNodeExtractionSchemaFieldIntegerFieldDef",
-    "NodeExtractNodeExtractionSchemaFieldFloatFieldDef",
-    "NodeExtractNodeExtractionSchemaFieldBooleanFieldDef",
-    "NodeExtractNodeExtractionSchemaFieldDateFieldDef",
-    "NodeExtractNodeExtractionSchemaFieldDatetimeFieldDef",
-    "NodeExtractNodeExtractionSchemaFieldEnumFieldDef",
-    "NodeExtractNodeExtractionSchemaFieldEnumFieldDefEnumOption",
-    "NodeExtractNodeExtractionSchemaFieldMultiSelectFieldDef",
-    "NodeExtractNodeExtractionSchemaFieldMultiSelectFieldDefEnumOption",
-    "NodeExtractNodeExtractionSchemaFieldObjectFieldDef",
-    "NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedField",
-    "NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldStringFieldDef",
-    "NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldIntegerFieldDef",
-    "NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldFloatFieldDef",
-    "NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldBooleanFieldDef",
-    "NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldDateFieldDef",
-    "NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldDatetimeFieldDef",
-    "NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldEnumFieldDef",
-    "NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldEnumFieldDefEnumOption",
-    "NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldMultiSelectFieldDef",
-    "NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldMultiSelectFieldDefEnumOption",
+    "NodeExtractNodeExtractionSchemaFieldStringField",
+    "NodeExtractNodeExtractionSchemaFieldIntegerField",
+    "NodeExtractNodeExtractionSchemaFieldFloatField",
+    "NodeExtractNodeExtractionSchemaFieldBooleanField",
+    "NodeExtractNodeExtractionSchemaFieldDateField",
+    "NodeExtractNodeExtractionSchemaFieldDatetimeField",
+    "NodeExtractNodeExtractionSchemaFieldEnumField",
+    "NodeExtractNodeExtractionSchemaFieldEnumFieldEnumOption",
+    "NodeExtractNodeExtractionSchemaFieldMultiSelectField",
+    "NodeExtractNodeExtractionSchemaFieldMultiSelectFieldEnumOption",
+    "NodeExtractNodeExtractionSchemaFieldObjectField",
+    "NodeExtractNodeExtractionSchemaFieldObjectFieldNestedField",
+    "NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldStringField",
+    "NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldIntegerField",
+    "NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldFloatField",
+    "NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldBooleanField",
+    "NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldDateField",
+    "NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldDatetimeField",
+    "NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldEnumField",
+    "NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldEnumFieldEnumOption",
+    "NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldMultiSelectField",
+    "NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldMultiSelectFieldEnumOption",
     "NodeExtractNodeLookupSchema",
-    "NodeExtractNodeLookupSchemaStringFieldDef",
-    "NodeExtractNodeLookupSchemaIntegerFieldDef",
-    "NodeExtractNodeLookupSchemaFloatFieldDef",
-    "NodeExtractNodeLookupSchemaBooleanFieldDef",
-    "NodeExtractNodeLookupSchemaDateFieldDef",
-    "NodeExtractNodeLookupSchemaDatetimeFieldDef",
-    "NodeExtractNodeLookupSchemaEnumFieldDef",
-    "NodeExtractNodeLookupSchemaEnumFieldDefEnumOption",
-    "NodeExtractNodeLookupSchemaMultiSelectFieldDef",
-    "NodeExtractNodeLookupSchemaMultiSelectFieldDefEnumOption",
-    "NodeExtractNodeLookupSchemaObjectFieldDef",
-    "NodeExtractNodeLookupSchemaObjectFieldDefNestedField",
-    "NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldStringFieldDef",
-    "NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldIntegerFieldDef",
-    "NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldFloatFieldDef",
-    "NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldBooleanFieldDef",
-    "NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldDateFieldDef",
-    "NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldDatetimeFieldDef",
-    "NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldEnumFieldDef",
-    "NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldEnumFieldDefEnumOption",
-    "NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldMultiSelectFieldDef",
-    "NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldMultiSelectFieldDefEnumOption",
+    "NodeExtractNodeLookupSchemaStringField",
+    "NodeExtractNodeLookupSchemaIntegerField",
+    "NodeExtractNodeLookupSchemaFloatField",
+    "NodeExtractNodeLookupSchemaBooleanField",
+    "NodeExtractNodeLookupSchemaDateField",
+    "NodeExtractNodeLookupSchemaDatetimeField",
+    "NodeExtractNodeLookupSchemaEnumField",
+    "NodeExtractNodeLookupSchemaEnumFieldEnumOption",
+    "NodeExtractNodeLookupSchemaMultiSelectField",
+    "NodeExtractNodeLookupSchemaMultiSelectFieldEnumOption",
+    "NodeExtractNodeLookupSchemaObjectField",
+    "NodeExtractNodeLookupSchemaObjectFieldNestedField",
+    "NodeExtractNodeLookupSchemaObjectFieldNestedFieldStringField",
+    "NodeExtractNodeLookupSchemaObjectFieldNestedFieldIntegerField",
+    "NodeExtractNodeLookupSchemaObjectFieldNestedFieldFloatField",
+    "NodeExtractNodeLookupSchemaObjectFieldNestedFieldBooleanField",
+    "NodeExtractNodeLookupSchemaObjectFieldNestedFieldDateField",
+    "NodeExtractNodeLookupSchemaObjectFieldNestedFieldDatetimeField",
+    "NodeExtractNodeLookupSchemaObjectFieldNestedFieldEnumField",
+    "NodeExtractNodeLookupSchemaObjectFieldNestedFieldEnumFieldEnumOption",
+    "NodeExtractNodeLookupSchemaObjectFieldNestedFieldMultiSelectField",
+    "NodeExtractNodeLookupSchemaObjectFieldNestedFieldMultiSelectFieldEnumOption",
     "NodeValidateNode",
     "NodeValidateNodeRule",
     "Edge",
@@ -135,7 +135,7 @@ class NodeSplitterNode(TypedDict, total=False):
     type: Required[Literal["splitter"]]
 
 
-class NodeExtractNodeExtractionSchemaFieldStringFieldDef(TypedDict, total=False):
+class NodeExtractNodeExtractionSchemaFieldStringField(TypedDict, total=False):
     data_type: Required[Literal["string"]]
 
     description: Required[str]
@@ -145,7 +145,7 @@ class NodeExtractNodeExtractionSchemaFieldStringFieldDef(TypedDict, total=False)
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeExtractionSchemaFieldIntegerFieldDef(TypedDict, total=False):
+class NodeExtractNodeExtractionSchemaFieldIntegerField(TypedDict, total=False):
     data_type: Required[Literal["integer"]]
 
     description: Required[str]
@@ -155,7 +155,7 @@ class NodeExtractNodeExtractionSchemaFieldIntegerFieldDef(TypedDict, total=False
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeExtractionSchemaFieldFloatFieldDef(TypedDict, total=False):
+class NodeExtractNodeExtractionSchemaFieldFloatField(TypedDict, total=False):
     data_type: Required[Literal["float"]]
 
     description: Required[str]
@@ -165,7 +165,7 @@ class NodeExtractNodeExtractionSchemaFieldFloatFieldDef(TypedDict, total=False):
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeExtractionSchemaFieldBooleanFieldDef(TypedDict, total=False):
+class NodeExtractNodeExtractionSchemaFieldBooleanField(TypedDict, total=False):
     data_type: Required[Literal["boolean"]]
 
     description: Required[str]
@@ -175,7 +175,7 @@ class NodeExtractNodeExtractionSchemaFieldBooleanFieldDef(TypedDict, total=False
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeExtractionSchemaFieldDateFieldDef(TypedDict, total=False):
+class NodeExtractNodeExtractionSchemaFieldDateField(TypedDict, total=False):
     data_type: Required[Literal["date"]]
 
     description: Required[str]
@@ -185,7 +185,7 @@ class NodeExtractNodeExtractionSchemaFieldDateFieldDef(TypedDict, total=False):
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeExtractionSchemaFieldDatetimeFieldDef(TypedDict, total=False):
+class NodeExtractNodeExtractionSchemaFieldDatetimeField(TypedDict, total=False):
     data_type: Required[Literal["datetime"]]
 
     description: Required[str]
@@ -195,45 +195,45 @@ class NodeExtractNodeExtractionSchemaFieldDatetimeFieldDef(TypedDict, total=Fals
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeExtractionSchemaFieldEnumFieldDefEnumOption(TypedDict, total=False):
+class NodeExtractNodeExtractionSchemaFieldEnumFieldEnumOption(TypedDict, total=False):
     description: Required[str]
     """Free-form description shown to the model."""
 
     name: Required[str]
 
 
-class NodeExtractNodeExtractionSchemaFieldEnumFieldDef(TypedDict, total=False):
+class NodeExtractNodeExtractionSchemaFieldEnumField(TypedDict, total=False):
     data_type: Required[Literal["enum"]]
 
     description: Required[str]
     """Free-form description shown to the extraction model."""
 
-    enum_options: Required[Iterable[NodeExtractNodeExtractionSchemaFieldEnumFieldDefEnumOption]]
+    enum_options: Required[Iterable[NodeExtractNodeExtractionSchemaFieldEnumFieldEnumOption]]
 
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeExtractionSchemaFieldMultiSelectFieldDefEnumOption(TypedDict, total=False):
+class NodeExtractNodeExtractionSchemaFieldMultiSelectFieldEnumOption(TypedDict, total=False):
     description: Required[str]
     """Free-form description shown to the model."""
 
     name: Required[str]
 
 
-class NodeExtractNodeExtractionSchemaFieldMultiSelectFieldDef(TypedDict, total=False):
+class NodeExtractNodeExtractionSchemaFieldMultiSelectField(TypedDict, total=False):
     data_type: Required[Literal["multi_select"]]
 
     description: Required[str]
     """Free-form description shown to the extraction model."""
 
-    enum_options: Required[Iterable[NodeExtractNodeExtractionSchemaFieldMultiSelectFieldDefEnumOption]]
+    enum_options: Required[Iterable[NodeExtractNodeExtractionSchemaFieldMultiSelectFieldEnumOption]]
 
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldStringFieldDef(TypedDict, total=False):
+class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldStringField(TypedDict, total=False):
     data_type: Required[Literal["string"]]
 
     description: Required[str]
@@ -243,7 +243,7 @@ class NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldStringFieldDe
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldIntegerFieldDef(TypedDict, total=False):
+class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldIntegerField(TypedDict, total=False):
     data_type: Required[Literal["integer"]]
 
     description: Required[str]
@@ -253,7 +253,7 @@ class NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldIntegerFieldD
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldFloatFieldDef(TypedDict, total=False):
+class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldFloatField(TypedDict, total=False):
     data_type: Required[Literal["float"]]
 
     description: Required[str]
@@ -263,7 +263,7 @@ class NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldFloatFieldDef
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldBooleanFieldDef(TypedDict, total=False):
+class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldBooleanField(TypedDict, total=False):
     data_type: Required[Literal["boolean"]]
 
     description: Required[str]
@@ -273,7 +273,7 @@ class NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldBooleanFieldD
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldDateFieldDef(TypedDict, total=False):
+class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldDateField(TypedDict, total=False):
     data_type: Required[Literal["date"]]
 
     description: Required[str]
@@ -283,7 +283,7 @@ class NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldDateFieldDef(
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldDatetimeFieldDef(TypedDict, total=False):
+class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldDatetimeField(TypedDict, total=False):
     data_type: Required[Literal["datetime"]]
 
     description: Required[str]
@@ -293,64 +293,60 @@ class NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldDatetimeField
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldEnumFieldDefEnumOption(TypedDict, total=False):
+class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldEnumFieldEnumOption(TypedDict, total=False):
     description: Required[str]
     """Free-form description shown to the model."""
 
     name: Required[str]
 
 
-class NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldEnumFieldDef(TypedDict, total=False):
+class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldEnumField(TypedDict, total=False):
     data_type: Required[Literal["enum"]]
 
     description: Required[str]
     """Free-form description shown to the extraction model."""
 
-    enum_options: Required[
-        Iterable[NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldEnumFieldDefEnumOption]
-    ]
+    enum_options: Required[Iterable[NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldEnumFieldEnumOption]]
 
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldMultiSelectFieldDefEnumOption(
-    TypedDict, total=False
-):
+class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldMultiSelectFieldEnumOption(TypedDict, total=False):
     description: Required[str]
     """Free-form description shown to the model."""
 
     name: Required[str]
 
 
-class NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldMultiSelectFieldDef(TypedDict, total=False):
+class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldMultiSelectField(TypedDict, total=False):
     data_type: Required[Literal["multi_select"]]
 
     description: Required[str]
     """Free-form description shown to the extraction model."""
 
     enum_options: Required[
-        Iterable[NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldMultiSelectFieldDefEnumOption]
+        Iterable[NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldMultiSelectFieldEnumOption]
     ]
 
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
 
-NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedField: TypeAlias = Union[
-    NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldStringFieldDef,
-    NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldIntegerFieldDef,
-    NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldFloatFieldDef,
-    NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldBooleanFieldDef,
-    NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldDateFieldDef,
-    NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldDatetimeFieldDef,
-    NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldEnumFieldDef,
-    NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedFieldMultiSelectFieldDef,
+NodeExtractNodeExtractionSchemaFieldObjectFieldNestedField: TypeAlias = Union[
+    NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldStringField,
+    NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldIntegerField,
+    NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldFloatField,
+    NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldBooleanField,
+    NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldDateField,
+    NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldDatetimeField,
+    NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldEnumField,
+    NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldMultiSelectField,
     object,
 ]
 
 
-class NodeExtractNodeExtractionSchemaFieldObjectFieldDef(TypedDict, total=False):
+class NodeExtractNodeExtractionSchemaFieldObjectField(TypedDict, total=False):
     data_type: Required[Literal["object"]]
 
     description: Required[str]
@@ -359,19 +355,19 @@ class NodeExtractNodeExtractionSchemaFieldObjectFieldDef(TypedDict, total=False)
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
-    nested_fields: Required[Iterable[NodeExtractNodeExtractionSchemaFieldObjectFieldDefNestedField]]
+    nested_fields: Required[Iterable[NodeExtractNodeExtractionSchemaFieldObjectFieldNestedField]]
 
 
 NodeExtractNodeExtractionSchemaField: TypeAlias = Union[
-    NodeExtractNodeExtractionSchemaFieldStringFieldDef,
-    NodeExtractNodeExtractionSchemaFieldIntegerFieldDef,
-    NodeExtractNodeExtractionSchemaFieldFloatFieldDef,
-    NodeExtractNodeExtractionSchemaFieldBooleanFieldDef,
-    NodeExtractNodeExtractionSchemaFieldDateFieldDef,
-    NodeExtractNodeExtractionSchemaFieldDatetimeFieldDef,
-    NodeExtractNodeExtractionSchemaFieldEnumFieldDef,
-    NodeExtractNodeExtractionSchemaFieldMultiSelectFieldDef,
-    NodeExtractNodeExtractionSchemaFieldObjectFieldDef,
+    NodeExtractNodeExtractionSchemaFieldStringField,
+    NodeExtractNodeExtractionSchemaFieldIntegerField,
+    NodeExtractNodeExtractionSchemaFieldFloatField,
+    NodeExtractNodeExtractionSchemaFieldBooleanField,
+    NodeExtractNodeExtractionSchemaFieldDateField,
+    NodeExtractNodeExtractionSchemaFieldDatetimeField,
+    NodeExtractNodeExtractionSchemaFieldEnumField,
+    NodeExtractNodeExtractionSchemaFieldMultiSelectField,
+    NodeExtractNodeExtractionSchemaFieldObjectField,
 ]
 
 
@@ -385,7 +381,7 @@ class NodeExtractNodeExtractionSchema(TypedDict, total=False):
     """Field definitions making up this extract's output."""
 
 
-class NodeExtractNodeLookupSchemaStringFieldDef(TypedDict, total=False):
+class NodeExtractNodeLookupSchemaStringField(TypedDict, total=False):
     data_type: Required[Literal["string"]]
 
     description: Required[str]
@@ -395,7 +391,7 @@ class NodeExtractNodeLookupSchemaStringFieldDef(TypedDict, total=False):
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeLookupSchemaIntegerFieldDef(TypedDict, total=False):
+class NodeExtractNodeLookupSchemaIntegerField(TypedDict, total=False):
     data_type: Required[Literal["integer"]]
 
     description: Required[str]
@@ -405,7 +401,7 @@ class NodeExtractNodeLookupSchemaIntegerFieldDef(TypedDict, total=False):
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeLookupSchemaFloatFieldDef(TypedDict, total=False):
+class NodeExtractNodeLookupSchemaFloatField(TypedDict, total=False):
     data_type: Required[Literal["float"]]
 
     description: Required[str]
@@ -415,7 +411,7 @@ class NodeExtractNodeLookupSchemaFloatFieldDef(TypedDict, total=False):
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeLookupSchemaBooleanFieldDef(TypedDict, total=False):
+class NodeExtractNodeLookupSchemaBooleanField(TypedDict, total=False):
     data_type: Required[Literal["boolean"]]
 
     description: Required[str]
@@ -425,7 +421,7 @@ class NodeExtractNodeLookupSchemaBooleanFieldDef(TypedDict, total=False):
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeLookupSchemaDateFieldDef(TypedDict, total=False):
+class NodeExtractNodeLookupSchemaDateField(TypedDict, total=False):
     data_type: Required[Literal["date"]]
 
     description: Required[str]
@@ -435,7 +431,7 @@ class NodeExtractNodeLookupSchemaDateFieldDef(TypedDict, total=False):
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeLookupSchemaDatetimeFieldDef(TypedDict, total=False):
+class NodeExtractNodeLookupSchemaDatetimeField(TypedDict, total=False):
     data_type: Required[Literal["datetime"]]
 
     description: Required[str]
@@ -445,45 +441,45 @@ class NodeExtractNodeLookupSchemaDatetimeFieldDef(TypedDict, total=False):
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeLookupSchemaEnumFieldDefEnumOption(TypedDict, total=False):
+class NodeExtractNodeLookupSchemaEnumFieldEnumOption(TypedDict, total=False):
     description: Required[str]
     """Free-form description shown to the model."""
 
     name: Required[str]
 
 
-class NodeExtractNodeLookupSchemaEnumFieldDef(TypedDict, total=False):
+class NodeExtractNodeLookupSchemaEnumField(TypedDict, total=False):
     data_type: Required[Literal["enum"]]
 
     description: Required[str]
     """Free-form description shown to the extraction model."""
 
-    enum_options: Required[Iterable[NodeExtractNodeLookupSchemaEnumFieldDefEnumOption]]
+    enum_options: Required[Iterable[NodeExtractNodeLookupSchemaEnumFieldEnumOption]]
 
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeLookupSchemaMultiSelectFieldDefEnumOption(TypedDict, total=False):
+class NodeExtractNodeLookupSchemaMultiSelectFieldEnumOption(TypedDict, total=False):
     description: Required[str]
     """Free-form description shown to the model."""
 
     name: Required[str]
 
 
-class NodeExtractNodeLookupSchemaMultiSelectFieldDef(TypedDict, total=False):
+class NodeExtractNodeLookupSchemaMultiSelectField(TypedDict, total=False):
     data_type: Required[Literal["multi_select"]]
 
     description: Required[str]
     """Free-form description shown to the extraction model."""
 
-    enum_options: Required[Iterable[NodeExtractNodeLookupSchemaMultiSelectFieldDefEnumOption]]
+    enum_options: Required[Iterable[NodeExtractNodeLookupSchemaMultiSelectFieldEnumOption]]
 
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldStringFieldDef(TypedDict, total=False):
+class NodeExtractNodeLookupSchemaObjectFieldNestedFieldStringField(TypedDict, total=False):
     data_type: Required[Literal["string"]]
 
     description: Required[str]
@@ -493,7 +489,7 @@ class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldStringFieldDef(TypedDi
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldIntegerFieldDef(TypedDict, total=False):
+class NodeExtractNodeLookupSchemaObjectFieldNestedFieldIntegerField(TypedDict, total=False):
     data_type: Required[Literal["integer"]]
 
     description: Required[str]
@@ -503,7 +499,7 @@ class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldIntegerFieldDef(TypedD
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldFloatFieldDef(TypedDict, total=False):
+class NodeExtractNodeLookupSchemaObjectFieldNestedFieldFloatField(TypedDict, total=False):
     data_type: Required[Literal["float"]]
 
     description: Required[str]
@@ -513,7 +509,7 @@ class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldFloatFieldDef(TypedDic
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldBooleanFieldDef(TypedDict, total=False):
+class NodeExtractNodeLookupSchemaObjectFieldNestedFieldBooleanField(TypedDict, total=False):
     data_type: Required[Literal["boolean"]]
 
     description: Required[str]
@@ -523,7 +519,7 @@ class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldBooleanFieldDef(TypedD
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldDateFieldDef(TypedDict, total=False):
+class NodeExtractNodeLookupSchemaObjectFieldNestedFieldDateField(TypedDict, total=False):
     data_type: Required[Literal["date"]]
 
     description: Required[str]
@@ -533,7 +529,7 @@ class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldDateFieldDef(TypedDict
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldDatetimeFieldDef(TypedDict, total=False):
+class NodeExtractNodeLookupSchemaObjectFieldNestedFieldDatetimeField(TypedDict, total=False):
     data_type: Required[Literal["datetime"]]
 
     description: Required[str]
@@ -543,58 +539,58 @@ class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldDatetimeFieldDef(Typed
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldEnumFieldDefEnumOption(TypedDict, total=False):
+class NodeExtractNodeLookupSchemaObjectFieldNestedFieldEnumFieldEnumOption(TypedDict, total=False):
     description: Required[str]
     """Free-form description shown to the model."""
 
     name: Required[str]
 
 
-class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldEnumFieldDef(TypedDict, total=False):
+class NodeExtractNodeLookupSchemaObjectFieldNestedFieldEnumField(TypedDict, total=False):
     data_type: Required[Literal["enum"]]
 
     description: Required[str]
     """Free-form description shown to the extraction model."""
 
-    enum_options: Required[Iterable[NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldEnumFieldDefEnumOption]]
+    enum_options: Required[Iterable[NodeExtractNodeLookupSchemaObjectFieldNestedFieldEnumFieldEnumOption]]
 
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
 
-class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldMultiSelectFieldDefEnumOption(TypedDict, total=False):
+class NodeExtractNodeLookupSchemaObjectFieldNestedFieldMultiSelectFieldEnumOption(TypedDict, total=False):
     description: Required[str]
     """Free-form description shown to the model."""
 
     name: Required[str]
 
 
-class NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldMultiSelectFieldDef(TypedDict, total=False):
+class NodeExtractNodeLookupSchemaObjectFieldNestedFieldMultiSelectField(TypedDict, total=False):
     data_type: Required[Literal["multi_select"]]
 
     description: Required[str]
     """Free-form description shown to the extraction model."""
 
-    enum_options: Required[Iterable[NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldMultiSelectFieldDefEnumOption]]
+    enum_options: Required[Iterable[NodeExtractNodeLookupSchemaObjectFieldNestedFieldMultiSelectFieldEnumOption]]
 
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
 
-NodeExtractNodeLookupSchemaObjectFieldDefNestedField: TypeAlias = Union[
-    NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldStringFieldDef,
-    NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldIntegerFieldDef,
-    NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldFloatFieldDef,
-    NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldBooleanFieldDef,
-    NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldDateFieldDef,
-    NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldDatetimeFieldDef,
-    NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldEnumFieldDef,
-    NodeExtractNodeLookupSchemaObjectFieldDefNestedFieldMultiSelectFieldDef,
+NodeExtractNodeLookupSchemaObjectFieldNestedField: TypeAlias = Union[
+    NodeExtractNodeLookupSchemaObjectFieldNestedFieldStringField,
+    NodeExtractNodeLookupSchemaObjectFieldNestedFieldIntegerField,
+    NodeExtractNodeLookupSchemaObjectFieldNestedFieldFloatField,
+    NodeExtractNodeLookupSchemaObjectFieldNestedFieldBooleanField,
+    NodeExtractNodeLookupSchemaObjectFieldNestedFieldDateField,
+    NodeExtractNodeLookupSchemaObjectFieldNestedFieldDatetimeField,
+    NodeExtractNodeLookupSchemaObjectFieldNestedFieldEnumField,
+    NodeExtractNodeLookupSchemaObjectFieldNestedFieldMultiSelectField,
     object,
 ]
 
 
-class NodeExtractNodeLookupSchemaObjectFieldDef(TypedDict, total=False):
+class NodeExtractNodeLookupSchemaObjectField(TypedDict, total=False):
     data_type: Required[Literal["object"]]
 
     description: Required[str]
@@ -603,19 +599,19 @@ class NodeExtractNodeLookupSchemaObjectFieldDef(TypedDict, total=False):
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
-    nested_fields: Required[Iterable[NodeExtractNodeLookupSchemaObjectFieldDefNestedField]]
+    nested_fields: Required[Iterable[NodeExtractNodeLookupSchemaObjectFieldNestedField]]
 
 
 NodeExtractNodeLookupSchema: TypeAlias = Union[
-    NodeExtractNodeLookupSchemaStringFieldDef,
-    NodeExtractNodeLookupSchemaIntegerFieldDef,
-    NodeExtractNodeLookupSchemaFloatFieldDef,
-    NodeExtractNodeLookupSchemaBooleanFieldDef,
-    NodeExtractNodeLookupSchemaDateFieldDef,
-    NodeExtractNodeLookupSchemaDatetimeFieldDef,
-    NodeExtractNodeLookupSchemaEnumFieldDef,
-    NodeExtractNodeLookupSchemaMultiSelectFieldDef,
-    NodeExtractNodeLookupSchemaObjectFieldDef,
+    NodeExtractNodeLookupSchemaStringField,
+    NodeExtractNodeLookupSchemaIntegerField,
+    NodeExtractNodeLookupSchemaFloatField,
+    NodeExtractNodeLookupSchemaBooleanField,
+    NodeExtractNodeLookupSchemaDateField,
+    NodeExtractNodeLookupSchemaDatetimeField,
+    NodeExtractNodeLookupSchemaEnumField,
+    NodeExtractNodeLookupSchemaMultiSelectField,
+    NodeExtractNodeLookupSchemaObjectField,
 ]
 
 
