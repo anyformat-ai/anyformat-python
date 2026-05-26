@@ -49,12 +49,9 @@ class TestWorkflows:
                 {
                     "id": "x",
                     "type": "parse",
-                    "effort": "low",
-                    "engine": "Fast",
                     "figure_enhancement": True,
                     "mode": "standard",
                     "prompt_hint": "prompt_hint",
-                    "visual_grounding_enabled": True,
                 }
             ],
             description="description",
@@ -565,12 +562,9 @@ class TestAsyncWorkflows:
                 {
                     "id": "x",
                     "type": "parse",
-                    "effort": "low",
-                    "engine": "Fast",
                     "figure_enhancement": True,
                     "mode": "standard",
                     "prompt_hint": "prompt_hint",
-                    "visual_grounding_enabled": True,
                 }
             ],
             description="description",
