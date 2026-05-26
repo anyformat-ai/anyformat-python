@@ -85,22 +85,12 @@ class NodeParseNode(TypedDict, total=False):
 
     type: Required[Literal["parse"]]
 
-    effort: Literal["low", "mid", "accurate"]
-    """Effort preset for the agentic parser.
-
-    Only consulted when `mode='agentic'`; ignored for `mode='standard'`.
-    """
-
-    engine: Literal["Fast", "Performant"]
-
     figure_enhancement: bool
 
     mode: Literal["standard", "agentic"]
 
     prompt_hint: Optional[str]
     """Free-form hint shown to the parse model to bias output."""
-
-    visual_grounding_enabled: bool
 
 
 class NodeClassifyNodeCategory(TypedDict, total=False):
@@ -642,8 +632,6 @@ class NodeExtractNode(TypedDict, total=False):
     """
 
     type: Required[Literal["extract"]]
-
-    engine: Literal["Fast", "Performant"]
 
     lookup_files: SequenceNotStr[str]
     """Smart-lookup reference document URIs persisted on the extract node."""
