@@ -40,6 +40,7 @@ __all__ = [
     "NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldEnumFieldEnumOption",
     "NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldMultiSelectField",
     "NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldMultiSelectFieldEnumOption",
+    "NodeExtractNodeLookupFileUpload",
     "NodeExtractNodeLookupSchema",
     "NodeExtractNodeLookupSchemaStringField",
     "NodeExtractNodeLookupSchemaIntegerField",
@@ -144,6 +145,8 @@ class NodeExtractNodeExtractionSchemaFieldStringField(TypedDict, total=False):
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
+    lookup: bool
+
 
 class NodeExtractNodeExtractionSchemaFieldIntegerField(TypedDict, total=False):
     data_type: Required[Literal["integer"]]
@@ -153,6 +156,8 @@ class NodeExtractNodeExtractionSchemaFieldIntegerField(TypedDict, total=False):
 
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
+
+    lookup: bool
 
 
 class NodeExtractNodeExtractionSchemaFieldFloatField(TypedDict, total=False):
@@ -164,6 +169,8 @@ class NodeExtractNodeExtractionSchemaFieldFloatField(TypedDict, total=False):
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
+    lookup: bool
+
 
 class NodeExtractNodeExtractionSchemaFieldBooleanField(TypedDict, total=False):
     data_type: Required[Literal["boolean"]]
@@ -173,6 +180,8 @@ class NodeExtractNodeExtractionSchemaFieldBooleanField(TypedDict, total=False):
 
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
+
+    lookup: bool
 
 
 class NodeExtractNodeExtractionSchemaFieldDateField(TypedDict, total=False):
@@ -184,6 +193,8 @@ class NodeExtractNodeExtractionSchemaFieldDateField(TypedDict, total=False):
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
+    lookup: bool
+
 
 class NodeExtractNodeExtractionSchemaFieldDatetimeField(TypedDict, total=False):
     data_type: Required[Literal["datetime"]]
@@ -193,6 +204,8 @@ class NodeExtractNodeExtractionSchemaFieldDatetimeField(TypedDict, total=False):
 
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
+
+    lookup: bool
 
 
 class NodeExtractNodeExtractionSchemaFieldEnumFieldEnumOption(TypedDict, total=False):
@@ -213,6 +226,8 @@ class NodeExtractNodeExtractionSchemaFieldEnumField(TypedDict, total=False):
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
+    lookup: bool
+
 
 class NodeExtractNodeExtractionSchemaFieldMultiSelectFieldEnumOption(TypedDict, total=False):
     description: Required[str]
@@ -232,6 +247,8 @@ class NodeExtractNodeExtractionSchemaFieldMultiSelectField(TypedDict, total=Fals
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
+    lookup: bool
+
 
 class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldStringField(TypedDict, total=False):
     data_type: Required[Literal["string"]]
@@ -241,6 +258,8 @@ class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldStringField(Type
 
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
+
+    lookup: bool
 
 
 class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldIntegerField(TypedDict, total=False):
@@ -252,6 +271,8 @@ class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldIntegerField(Typ
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
+    lookup: bool
+
 
 class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldFloatField(TypedDict, total=False):
     data_type: Required[Literal["float"]]
@@ -261,6 +282,8 @@ class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldFloatField(Typed
 
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
+
+    lookup: bool
 
 
 class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldBooleanField(TypedDict, total=False):
@@ -272,6 +295,8 @@ class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldBooleanField(Typ
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
+    lookup: bool
+
 
 class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldDateField(TypedDict, total=False):
     data_type: Required[Literal["date"]]
@@ -282,6 +307,8 @@ class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldDateField(TypedD
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
+    lookup: bool
+
 
 class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldDatetimeField(TypedDict, total=False):
     data_type: Required[Literal["datetime"]]
@@ -291,6 +318,8 @@ class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldDatetimeField(Ty
 
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
+
+    lookup: bool
 
 
 class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldEnumFieldEnumOption(TypedDict, total=False):
@@ -310,6 +339,8 @@ class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldEnumField(TypedD
 
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
+
+    lookup: bool
 
 
 class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldMultiSelectFieldEnumOption(TypedDict, total=False):
@@ -331,6 +362,8 @@ class NodeExtractNodeExtractionSchemaFieldObjectFieldNestedFieldMultiSelectField
 
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
+
+    lookup: bool
 
 
 NodeExtractNodeExtractionSchemaFieldObjectFieldNestedField: TypeAlias = Union[
@@ -357,6 +390,8 @@ class NodeExtractNodeExtractionSchemaFieldObjectField(TypedDict, total=False):
 
     nested_fields: Required[Iterable[NodeExtractNodeExtractionSchemaFieldObjectFieldNestedField]]
 
+    lookup: bool
+
 
 NodeExtractNodeExtractionSchemaField: TypeAlias = Union[
     NodeExtractNodeExtractionSchemaFieldStringField,
@@ -381,6 +416,21 @@ class NodeExtractNodeExtractionSchema(TypedDict, total=False):
     """Field definitions making up this extract's output."""
 
 
+class NodeExtractNodeLookupFileUpload(TypedDict, total=False):
+    """Inline lookup-file content carried on the typed create call.
+
+    The backend reads ``filename`` + ``content`` (base64-encoded bytes),
+    uploads the file to S3 during workflow create, and stores the resulting
+    URI in ``ExtractNode.lookup_files``. This field is stripped from the
+    persisted ``GraphNode.config`` — it is create-input only.
+    """
+
+    content: Required[str]
+    """Base64-encoded file bytes."""
+
+    filename: Required[str]
+
+
 class NodeExtractNodeLookupSchemaStringField(TypedDict, total=False):
     data_type: Required[Literal["string"]]
 
@@ -389,6 +439,8 @@ class NodeExtractNodeLookupSchemaStringField(TypedDict, total=False):
 
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
+
+    lookup: bool
 
 
 class NodeExtractNodeLookupSchemaIntegerField(TypedDict, total=False):
@@ -400,6 +452,8 @@ class NodeExtractNodeLookupSchemaIntegerField(TypedDict, total=False):
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
+    lookup: bool
+
 
 class NodeExtractNodeLookupSchemaFloatField(TypedDict, total=False):
     data_type: Required[Literal["float"]]
@@ -409,6 +463,8 @@ class NodeExtractNodeLookupSchemaFloatField(TypedDict, total=False):
 
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
+
+    lookup: bool
 
 
 class NodeExtractNodeLookupSchemaBooleanField(TypedDict, total=False):
@@ -420,6 +476,8 @@ class NodeExtractNodeLookupSchemaBooleanField(TypedDict, total=False):
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
+    lookup: bool
+
 
 class NodeExtractNodeLookupSchemaDateField(TypedDict, total=False):
     data_type: Required[Literal["date"]]
@@ -430,6 +488,8 @@ class NodeExtractNodeLookupSchemaDateField(TypedDict, total=False):
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
+    lookup: bool
+
 
 class NodeExtractNodeLookupSchemaDatetimeField(TypedDict, total=False):
     data_type: Required[Literal["datetime"]]
@@ -439,6 +499,8 @@ class NodeExtractNodeLookupSchemaDatetimeField(TypedDict, total=False):
 
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
+
+    lookup: bool
 
 
 class NodeExtractNodeLookupSchemaEnumFieldEnumOption(TypedDict, total=False):
@@ -459,6 +521,8 @@ class NodeExtractNodeLookupSchemaEnumField(TypedDict, total=False):
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
+    lookup: bool
+
 
 class NodeExtractNodeLookupSchemaMultiSelectFieldEnumOption(TypedDict, total=False):
     description: Required[str]
@@ -478,6 +542,8 @@ class NodeExtractNodeLookupSchemaMultiSelectField(TypedDict, total=False):
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
+    lookup: bool
+
 
 class NodeExtractNodeLookupSchemaObjectFieldNestedFieldStringField(TypedDict, total=False):
     data_type: Required[Literal["string"]]
@@ -487,6 +553,8 @@ class NodeExtractNodeLookupSchemaObjectFieldNestedFieldStringField(TypedDict, to
 
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
+
+    lookup: bool
 
 
 class NodeExtractNodeLookupSchemaObjectFieldNestedFieldIntegerField(TypedDict, total=False):
@@ -498,6 +566,8 @@ class NodeExtractNodeLookupSchemaObjectFieldNestedFieldIntegerField(TypedDict, t
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
+    lookup: bool
+
 
 class NodeExtractNodeLookupSchemaObjectFieldNestedFieldFloatField(TypedDict, total=False):
     data_type: Required[Literal["float"]]
@@ -507,6 +577,8 @@ class NodeExtractNodeLookupSchemaObjectFieldNestedFieldFloatField(TypedDict, tot
 
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
+
+    lookup: bool
 
 
 class NodeExtractNodeLookupSchemaObjectFieldNestedFieldBooleanField(TypedDict, total=False):
@@ -518,6 +590,8 @@ class NodeExtractNodeLookupSchemaObjectFieldNestedFieldBooleanField(TypedDict, t
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
+    lookup: bool
+
 
 class NodeExtractNodeLookupSchemaObjectFieldNestedFieldDateField(TypedDict, total=False):
     data_type: Required[Literal["date"]]
@@ -528,6 +602,8 @@ class NodeExtractNodeLookupSchemaObjectFieldNestedFieldDateField(TypedDict, tota
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
+    lookup: bool
+
 
 class NodeExtractNodeLookupSchemaObjectFieldNestedFieldDatetimeField(TypedDict, total=False):
     data_type: Required[Literal["datetime"]]
@@ -537,6 +613,8 @@ class NodeExtractNodeLookupSchemaObjectFieldNestedFieldDatetimeField(TypedDict, 
 
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
+
+    lookup: bool
 
 
 class NodeExtractNodeLookupSchemaObjectFieldNestedFieldEnumFieldEnumOption(TypedDict, total=False):
@@ -557,6 +635,8 @@ class NodeExtractNodeLookupSchemaObjectFieldNestedFieldEnumField(TypedDict, tota
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
 
+    lookup: bool
+
 
 class NodeExtractNodeLookupSchemaObjectFieldNestedFieldMultiSelectFieldEnumOption(TypedDict, total=False):
     description: Required[str]
@@ -575,6 +655,8 @@ class NodeExtractNodeLookupSchemaObjectFieldNestedFieldMultiSelectField(TypedDic
 
     name: Required[str]
     """Field name. Used as the key in the extraction response."""
+
+    lookup: bool
 
 
 NodeExtractNodeLookupSchemaObjectFieldNestedField: TypeAlias = Union[
@@ -600,6 +682,8 @@ class NodeExtractNodeLookupSchemaObjectField(TypedDict, total=False):
     """Field name. Used as the key in the extraction response."""
 
     nested_fields: Required[Iterable[NodeExtractNodeLookupSchemaObjectFieldNestedField]]
+
+    lookup: bool
 
 
 NodeExtractNodeLookupSchema: TypeAlias = Union[
@@ -628,6 +712,13 @@ class NodeExtractNode(TypedDict, total=False):
     """
 
     type: Required[Literal["extract"]]
+
+    lookup_file_uploads: Iterable[NodeExtractNodeLookupFileUpload]
+    """Inline lookup-file content for the typed create call.
+
+    The backend uploads each entry to S3 and stores the resulting URI in
+    `lookup_files`; this field is never persisted in GraphNode.config.
+    """
 
     lookup_files: SequenceNotStr[str]
     """Smart-lookup reference document URIs persisted on the extract node."""
