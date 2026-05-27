@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.6.0 (2026-05-27)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/anyformat-ai/anyformat-python/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* **api:** api update ([3455007](https://github.com/anyformat-ai/anyformat-python/commit/3455007969e810397c7b12f0570dea5bdbab4753))
+* **api:** api update ([f9f1103](https://github.com/anyformat-ai/anyformat-python/commit/f9f11038f14e9c50b4d8486c7183e50bc9605e12))
+* **api:** api update ([71cac39](https://github.com/anyformat-ai/anyformat-python/commit/71cac393094e99ce26fc55ab5e8c5beaa788a7bb))
+* **api:** api update ([1ba36ae](https://github.com/anyformat-ai/anyformat-python/commit/1ba36aedac0458b0d197a90f5222bc549509da70))
+* **api:** api update ([b612f4e](https://github.com/anyformat-ai/anyformat-python/commit/b612f4e4547722c448607386448a37fc65abc4d0))
+* **api:** api update ([c2ecd7f](https://github.com/anyformat-ai/anyformat-python/commit/c2ecd7f3b4062bd95c45eb82e9721f7cbf24a5c7))
+* **api:** api update ([4558ae8](https://github.com/anyformat-ai/anyformat-python/commit/4558ae87aece1e2e9f51e576c91dda07cd18eec3))
+* **api:** api update ([25aa866](https://github.com/anyformat-ai/anyformat-python/commit/25aa866a54637979fe8949e4a03894e536c849c7))
+* **api:** api update ([4178505](https://github.com/anyformat-ai/anyformat-python/commit/417850535ee4001e5886f0b92fef411acfaf32ca))
+* **api:** api update ([a272b04](https://github.com/anyformat-ai/anyformat-python/commit/a272b04f56aeb963cd89c59a123d8248833cc5a2))
+* **api:** api update ([6c04df9](https://github.com/anyformat-ai/anyformat-python/commit/6c04df95280727d23361783f23152a83bde18be2))
+* **api:** api update ([aac9c9f](https://github.com/anyformat-ai/anyformat-python/commit/aac9c9f7dc21181eb1679ecd2c7145419a68bf37))
+* **api:** api update ([8b223fa](https://github.com/anyformat-ai/anyformat-python/commit/8b223fa97f46d38c8a39f60bf5b7753c4e840d20))
+* **internal/types:** support eagerly validating pydantic iterators ([135b3ec](https://github.com/anyformat-ai/anyformat-python/commit/135b3ec0297a7957369fe0803a865ed10e158557))
+
+
+### Bug Fixes
+
+* **client:** add missing f-string prefix in file type error message ([e7be8b3](https://github.com/anyformat-ai/anyformat-python/commit/e7be8b34ec6995edc7e370304c0698bd35a451a7))
+
+
+### Chores
+
+* **internal:** reformat pyproject.toml ([d69c4c8](https://github.com/anyformat-ai/anyformat-python/commit/d69c4c8c066ba41544ed522f16392200714906d6))
+
 ## 0.5.0 (2026-04-28)
 
 Full Changelog: [v0.4.0...v0.5.0](https://github.com/anyformat-ai/anyformat-python/compare/v0.4.0...v0.5.0)
